@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane animated="true " blendMode="DIFFERENCE" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" prefHeight="720.0" prefWidth="1280.0" text="Cadastro Visita" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiControllerCadastroVisita">
+	<content>
+		<AnchorPane maxHeight="694.0" maxWidth="1278.0" minHeight="658.0" minWidth="1278.0" prefHeight="658.0" prefWidth="1278.0">
+			<children>
+				<Label fx:id="title" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="512.0" layoutY="95.0" scaleShape="false" text="Cadastrar Visita Tecnica">
+					<font>
+						<Font name="Comic Sans MS" size="36.0" />
+					</font>
+				</Label>
+				<TextField fx:id="numeroChamado" alignment="CENTER" layoutX="760.0" layoutY="171.0" prefHeight="10.0" prefWidth="237.0" promptText="NNNN" scaleShape="false">
+					<font>
+						<Font name="Comic Sans MS" size="19.0" />
+					</font>
+				</TextField>
+				<TextField fx:id="tecnico" alignment="CENTER" layoutX="760.0" layoutY="231.0" prefHeight="42.0" prefWidth="237.0" promptText="Nome Tecnico" scaleShape="false">
+					<font>
+						<Font name="Comic Sans MS" size="19.0" />
+					</font>
+				</TextField>
+				<TextField fx:id="dataInicio" alignment="CENTER" layoutX="760.0" layoutY="291.0" prefHeight="42.0" prefWidth="237.0" promptText="dd/MM/aaaa" scaleShape="false">
+					<font>
+						<Font name="Comic Sans MS" size="19.0" />
+					</font>
+				</TextField>
+				<TextField fx:id="dataFim" alignment="TOP_CENTER" layoutX="760.0" layoutY="351.0" prefHeight="42.0" prefWidth="237.0" promptText="dd/MM/aaaa" scaleShape="false">
+					<font>
+						<Font name="Comic Sans MS" size="19.0" />
+					</font>
+				</TextField>
+				<TextField fx:id="tarefaPai" alignment="TOP_CENTER" layoutX="760.0" layoutY="411.0" prefHeight="42.0" prefWidth="237.0" promptText="Tarefa Pai" scaleShape="false">
+					<font>
+						<Font name="Comic Sans MS" size="19.0" />
+					</font>
+				</TextField>
+				<TextField fx:id="situacao" alignment="TOP_CENTER" layoutX="760.0" layoutY="471.0" prefHeight="42.0" prefWidth="237.0" promptText="confirmada, finalziada..." scaleShape="false">
+					<font>
+						<Font name="Comic Sans MS" size="19.0" />
+					</font>
+				</TextField>
+				<Label layoutX="463.0" layoutY="171.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Numero Chamado" textAlignment="CENTER" wrapText="true">
+					<font>
+						<Font name="Comic Sans MS" size="18.0" />
+					</font>
+				</Label>
+				<Label layoutX="463.0" layoutY="231.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Tecnico" textAlignment="CENTER" wrapText="true">
+					<font>
+						<Font name="Comic Sans MS" size="18.0" />
+					</font>
+				</Label>
+				<Label layoutX="463.0" layoutY="291.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Data Inicio" textAlignment="CENTER" wrapText="true">
+					<font>
+						<Font name="Comic Sans MS" size="18.0" />
+					</font>
+				</Label>
+				<Label layoutX="463.0" layoutY="351.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Data Prevista" textAlignment="CENTER" wrapText="true">
+					<font>
+						<Font name="Comic Sans MS" size="18.0" />
+					</font>
+				</Label>
+				<Label layoutX="463.0" layoutY="411.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Tarefa Pai" textAlignment="CENTER" wrapText="true">
+					<font>
+						<Font name="Comic Sans MS" size="18.0" />
+					</font>
+				</Label>
+				<Label layoutX="463.0" layoutY="471.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Situação" textAlignment="CENTER" wrapText="true">
+					<font>
+						<Font name="Comic Sans MS" size="18.0" />
+					</font>
+				</Label>
+				<CheckBox fx:id="isCobrada" layoutX="760.0" layoutY="528.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="237.0" text="Cobrada">
+					<font>
+						<Font name="Comic Sans MS" size="19.0" />
+					</font>
+				</CheckBox>
+				<Button fx:id="cancel" depthTest="ENABLE" layoutX="463.0" layoutY="573.0" mnemonicParsing="false" onAction="#cancelarButton" prefHeight="32.0" prefWidth="96.0" text="Cancelar">
+					<font>
+						<Font name="Comic Sans MS" size="18.0" />
+					</font>
+				</Button>
+				<Button fx:id="save" depthTest="ENABLE" layoutX="901.0" layoutY="573.0" mnemonicParsing="false" onAction="#salvarButton" prefHeight="32.0" prefWidth="96.0" text="Salvar">
+					<font>
+						<Font name="Comic Sans MS" size="18.0" />
+					</font>
+				</Button>
+            <Button fx:id="inicio" blendMode="DARKEN" depthTest="ENABLE" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectInicio" prefHeight="31.0" prefWidth="175.0" text="Inicio">
+               <font>
+                  <Font name="Comic Sans MS" size="18.0" />
+               </font>
+            </Button>
+			</children>
+		</AnchorPane>
+	</content>
+   <font>
+      <Font name="Comic Sans MS" size="14.0" />
+   </font>
+</TitledPane>

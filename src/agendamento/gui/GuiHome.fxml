@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane animated="true" blendMode="DIFFERENCE" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" text="Welcome" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiHome">
+	<content>
+		<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="1278.0">
+			<children>
+				<VBox layoutX="464.0" layoutY="96.0" prefHeight="502.0" prefWidth="351.0">
+					<children>
+						<Button fx:id="cadastrarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelacadastrarVisita" prefHeight="100.0" prefWidth="350.0" text="Cadastrar Visita">
+							<font>
+								<Font name="Comic Sans MS" size="29.0" />
+							</font>
+						</Button>
+						<Button mnemonicParsing="false" prefHeight="100.0" prefWidth="350.0" visible="false" />
+						<Button fx:id="consultarVisitaBotao" mnemonicParsing="false" prefHeight="100.0" prefWidth="350.0" text="Consultar Visita">
+							<font>
+								<Font name="Comic Sans MS" size="29.0" />
+							</font>
+						</Button>
+						<Button mnemonicParsing="false" prefHeight="100.0" prefWidth="350.0" visible="false" />
+						<Button fx:id="deletarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelaDeletarVisita" prefHeight="100.0" prefWidth="350.0" text="Deletar Visita">
+							<font>
+								<Font name="Comic Sans MS" size="29.0" />
+							</font>
+						</Button>
+					</children>
+				</VBox>
+			</children>
+		</AnchorPane>
+	</content>
+   <font>
+      <Font name="Comic Sans MS" size="14.0" />
+   </font>
+</TitledPane>
