@@ -1,8 +1,6 @@
 package agendamento.gui;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 import agendamento.VisitaTecnica;
 import agendamento.dao.VisitaTecnicaDao;
@@ -10,13 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -24,7 +20,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class GuiControllerDeletarVisita implements Initializable {
+public class GuiControllerDeletarVisita {
 	@FXML
 	private TitledPane principal;
 	@FXML
@@ -72,9 +68,12 @@ public class GuiControllerDeletarVisita implements Initializable {
 		try {
 			VisitaTecnica v = new VisitaTecnicaDao().buscarPorNumeroChamado(Integer.parseInt(numeroChamado.getText()));
 			System.out.println(v.getLad());
-			adicionarArrayList();
+			adicionarVisitaTableView(v);
 			tabela.setVisible(true);
 			System.out.println(v.toString());
+			if (confirmarDelete.isPressed()) {
+				selectButtonExcluir(action);
+			}
 		} catch (RuntimeException e) {
 			notice.setVisible(true);
 			buscar.setVisible(false);
@@ -82,12 +81,14 @@ public class GuiControllerDeletarVisita implements Initializable {
 
 		}
 	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	
+	@FXML
+	public void selectButtonExcluir(ActionEvent event) {
+		System.out.println("Confirmei delete chamado: "+numeroChamado.getText());
+		new VisitaTecnicaDao().deletar(Integer.parseInt(numeroChamado.getText()));
 		
-
 	}
+	
 	
 	public void adicionarVisitaTableView(VisitaTecnica v) {
 		if(!observableVisita.isEmpty()) {
