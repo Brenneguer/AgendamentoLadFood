@@ -1,6 +1,7 @@
 package agendamento.gui;
 
 import agendamento.VisitaTecnica;
+import agendamento.dao.VisitaTecnicaDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -15,31 +16,30 @@ import javafx.stage.Stage;
 //            CriarView, GuiHome
 
 public class GuiControllerCadastroVisita {
-    @FXML
-    private AnchorPane cadastroVisita;
-    @FXML
-    private Label title;
-    @FXML
-    private TextField numeroChamado;
-    @FXML
-    private TextField tecnico;
-    @FXML
-    private TextField dataInicio;
-    @FXML
-    private TextField dataFim;
-    @FXML
-    private TextField tarefaPai;
-    @FXML
-    private TextField situacao;
-    @FXML
-    private CheckBox isCobrada;
-    @FXML
-    private Button save;
-    @FXML
-    private Button cancel;
-    @FXML
-    private Button inicio;
-
+	@FXML
+	private AnchorPane cadastroVisita;
+	@FXML
+	private Label title;
+	@FXML
+	private TextField numeroChamado;
+	@FXML
+	private TextField tecnico;
+	@FXML
+	private TextField dataInicio;
+	@FXML
+	private TextField dataFim;
+	@FXML
+	private TextField tarefaPai;
+	@FXML
+	private TextField situacao;
+	@FXML
+	private CheckBox isCobrada;
+	@FXML
+	private Button save;
+	@FXML
+	private Button cancel;
+	@FXML
+	private Button inicio;
 
 	public void selectInicio(ActionEvent e) {
 		Node n = (Node) e.getSource();
@@ -49,18 +49,21 @@ public class GuiControllerCadastroVisita {
 	}
 
 	@FXML
-	public void salvarButton(ActionEvent e) {
-		VisitaTecnica v = new VisitaTecnica();
-		v.setNumeroChamado(Integer.parseInt(numeroChamado.getText()));
-		v.setTecnico(tecnico.getText());
-		v.setDataInicio(dataInicio.getText());
-		v.setDataFim(dataFim.getText());
-		v.setIdEmpresa(Integer.parseInt(tarefaPai.getText()));
-		v.setSituacao(situacao.getText());
-		v.setLad(isCobrada.isSelected());
-		System.out.println(v.toString());
-		System.out.println(v.isLad());
-		cancelarButton(e);
+	public void salvarButton(ActionEvent event) {
+		try {
+			VisitaTecnica v = new VisitaTecnica();
+			v.setNumeroChamado(Integer.parseInt(numeroChamado.getText()));
+			v.setTecnico(tecnico.getText());
+			v.setDataInicio(dataInicio.getText());
+			v.setDataFim(dataFim.getText());
+			v.setIdEmpresa(Integer.parseInt(tarefaPai.getText()));
+			v.setSituacao(situacao.getText());
+			v.setLad(isCobrada.isSelected());
+			new VisitaTecnicaDao().salvar(v);
+			cancelarButton(event);
+		} catch (RuntimeException e) {
+			selectInicio(event);
+		}
 	}
 
 	public void cancelarButton(ActionEvent e) {

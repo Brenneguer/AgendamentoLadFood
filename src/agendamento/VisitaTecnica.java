@@ -10,7 +10,7 @@ public class VisitaTecnica {
 	private LocalDate dataFim;
 	private String tecnico;
 	private int idEmpresa;
-	private boolean isLad;
+	private Boolean lad;
 	private String situacao;
 
 	public void setNumeroChamado(int numeroChamado) {
@@ -61,12 +61,13 @@ public class VisitaTecnica {
 		return tecnico;
 	}
 
-	public boolean isLad() {
-		return isLad;
+	public Boolean getLad() {
+		return lad;
 	}
 
-	public void setLad(boolean isLad) {
-		this.isLad = isLad;
+	public void setLad(Boolean isLad) {
+		this.lad = isLad;
+
 	}
 
 	public int getIdEmpresa() {
@@ -84,6 +85,7 @@ public class VisitaTecnica {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
+	
 
 	public String toString() {
 		return (new StringBuilder("\nNumero Chamado: ")).append(getNumeroChamado()).append("\tEmpresa: ")

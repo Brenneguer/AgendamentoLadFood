@@ -35,7 +35,7 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 			query.setString(3, obj.getDataFim().toString());
 			query.setInt(4, obj.getIdEmpresa());
 			query.setString(5, obj.getTecnico());
-			query.setBoolean(6, obj.isLad());
+			query.setBoolean(6, obj.getLad());
 			query.setString(7, obj.getSituacao());
 			int insert = query.executeUpdate();
 			if (insert > 0)
@@ -87,7 +87,7 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 				v.setNumeroChamado(rs.getInt("numero_chamado"));
 				v.setIdEmpresa(rs.getInt("id_empresa"));
 				v.setTecnico(rs.getString("tecnico"));
-				v.setLad(rs.getBoolean("is_lad"));
+				v.setLad(rs.getBoolean(	"is_lad"));
 				v.setSituacao(rs.getString("situacao"));
 				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setDataInicio(
