@@ -6,9 +6,9 @@ import agendamento.ChaveEstrangeiraException;
 
 public interface IDao<T> {
 
-	public void salvar(T istance) throws ChaveEstrangeiraException;
+	public boolean salvar(T istance) throws ChaveEstrangeiraException;
 
-	public void deletar(int i);
+	public boolean deletar(int i);
 
 	public List<T> listarTodos();
 }

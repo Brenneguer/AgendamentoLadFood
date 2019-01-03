@@ -67,6 +67,7 @@ public class GuiControllerDeletarVisita {
 	public void selectButtonBuscar(ActionEvent action) {
 		try {
 			VisitaTecnica v = new VisitaTecnicaDao().buscarPorNumeroChamado(Integer.parseInt(numeroChamado.getText()));
+			notice.setVisible(false);
 			System.out.println(v.getLad());
 			adicionarVisitaTableView(v);
 			tabela.setVisible(true);
@@ -75,17 +76,20 @@ public class GuiControllerDeletarVisita {
 				selectButtonExcluir(action);
 			}
 		} catch (RuntimeException e) {
+			tabela.setVisible(false);
 			notice.setVisible(true);
-			buscar.setVisible(false);
 			System.out.println("não achei");
-
 		}
 	}
 	
 	@FXML
 	public void selectButtonExcluir(ActionEvent event) {
 		System.out.println("Confirmei delete chamado: "+numeroChamado.getText());
-		new VisitaTecnicaDao().deletar(Integer.parseInt(numeroChamado.getText()));
+		if (new VisitaTecnicaDao().deletar(Integer.parseInt(numeroChamado.getText())) == true) {
+			numeroChamado.clear();
+			tabela.setVisible(false);
+		};
+		
 		
 	}
 	

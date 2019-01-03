@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <TitledPane animated="true " blendMode="DIFFERENCE" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" prefHeight="720.0" prefWidth="1280.0" text="Cadastro Visita" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiControllerCadastroVisita">
@@ -17,66 +19,74 @@
 						<Font name="Comic Sans MS" size="36.0" />
 					</font>
 				</Label>
-				<TextField fx:id="numeroChamado" alignment="CENTER" layoutX="760.0" layoutY="171.0" prefHeight="10.0" prefWidth="237.0" promptText="NNNN" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="19.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="tecnico" alignment="CENTER" layoutX="760.0" layoutY="231.0" prefHeight="42.0" prefWidth="237.0" promptText="Nome Tecnico" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="19.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="dataInicio" alignment="CENTER" layoutX="760.0" layoutY="291.0" prefHeight="42.0" prefWidth="237.0" promptText="dd/MM/aaaa" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="19.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="dataFim" alignment="TOP_CENTER" layoutX="760.0" layoutY="351.0" prefHeight="42.0" prefWidth="237.0" promptText="dd/MM/aaaa" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="19.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="tarefaPai" alignment="TOP_CENTER" layoutX="760.0" layoutY="411.0" prefHeight="42.0" prefWidth="237.0" promptText="Tarefa Pai" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="19.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="situacao" alignment="TOP_CENTER" layoutX="760.0" layoutY="471.0" prefHeight="42.0" prefWidth="237.0" promptText="confirmada, finalziada..." scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="19.0" />
-					</font>
-				</TextField>
-				<Label layoutX="463.0" layoutY="171.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Numero Chamado" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label layoutX="463.0" layoutY="231.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Tecnico" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label layoutX="463.0" layoutY="291.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Data Inicio" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label layoutX="463.0" layoutY="351.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Data Prevista" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label layoutX="463.0" layoutY="411.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Tarefa Pai" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label layoutX="463.0" layoutY="471.0" prefHeight="30.0" prefWidth="167.0" scaleShape="false" text="Situação" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
+            <VBox fx:id="textFilds" layoutX="618.0" layoutY="195.0" prefHeight="297.0" prefWidth="256.0" spacing="15.0">
+               <children>
+      				<TextField fx:id="numeroChamado" alignment="CENTER" promptText="NNNN" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="tecnico" alignment="CENTER" promptText="Nome Tecnico" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="dataInicio" alignment="CENTER" promptText="dd/MM/aaaa" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="dataFim" alignment="TOP_CENTER" promptText="dd/MM/aaaa" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="tarefaPai" alignment="TOP_CENTER" promptText="Tarefa Pai" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="situacao" alignment="TOP_CENTER" prefHeight="34.0" prefWidth="162.0" promptText="confirmada, finalziada..." scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+               </children>
+            </VBox>
+            <VBox fx:id="labels" layoutX="463.0" layoutY="199.0" prefHeight="290.0" prefWidth="150.0" spacing="28.0">
+               <children>
+      				<Label scaleShape="false" text="Numero Chamado" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Tecnico" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Data Inicio" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Data Prevista" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Tarefa Pai" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Situação" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+               </children>
+            </VBox>
 				<CheckBox fx:id="isCobrada" layoutX="760.0" layoutY="528.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="237.0" text="Cobrada">
 					<font>
 						<Font name="Comic Sans MS" size="19.0" />
@@ -97,6 +107,21 @@
                   <Font name="Comic Sans MS" size="18.0" />
                </font>
             </Button>
+            <Pane fx:id="notice" layoutX="436.0" layoutY="305.0" prefHeight="79.0" prefWidth="406.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="405.0" text="Algo de inesperado ocorreu, tente novamente.">
+                     <font>
+                        <Font name="Comic Sans MS" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="noticeBack" layoutX="177.0" layoutY="40.0" mnemonicParsing="false" onAction="#selectNoticeBack" text="Return">
+                     <font>
+                        <Font name="Comic Sans MS" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            
 			</children>
 		</AnchorPane>
 	</content>
