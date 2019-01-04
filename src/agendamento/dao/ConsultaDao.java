@@ -49,4 +49,6 @@ public final class ConsultaDao {
 		}
 		return listaVisita;
 	}
+	
+	
 }
