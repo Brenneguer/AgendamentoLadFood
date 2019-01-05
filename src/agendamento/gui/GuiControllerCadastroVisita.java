@@ -13,8 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-// Referenced classes of package agendamento.gui:
-//            CriarView, GuiHome
 
 public class GuiControllerCadastroVisita {
 	@FXML

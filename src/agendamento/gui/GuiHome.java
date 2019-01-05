@@ -28,6 +28,21 @@ public class GuiHome {
 	private Button deletarVisitaBotao;
 	String envia;
 
+
+	public void chamarTelaHome(ActionEvent e) {
+		node = (Node) e.getSource();
+		stage = (Stage) node.getScene().getWindow();
+		envia = "/agendamento/gui/GuiHome.fxml";
+		(new CriarView()).criarTela(stage, envia);
+		envia = "";
+	}
+	
+	public void chamarTelaConsultaVisita(ActionEvent e) {
+		node = (Node) e.getSource();
+		stage = (Stage) node.getScene().getWindow();
+		envia = "/agendamento/gui/GuiConsultaVisitaHome.fxml";
+		(new CriarView()).criarTela(stage, envia);
+	}
 	@FXML
 	public void chamarTelacadastrarVisita(ActionEvent e) {
 		node = (Node) e.getSource();
@@ -37,13 +52,7 @@ public class GuiHome {
 		envia = "";
 	}
 
-	public void chamarTelaHome(ActionEvent e) {
-		node = (Node) e.getSource();
-		stage = (Stage) node.getScene().getWindow();
-		envia = "/agendamento/gui/GuiHome.fxml";
-		(new CriarView()).criarTela(stage, envia);
-		envia = "";
-	}
+
 
 	public void chamarTelaDeletarVisita(ActionEvent e) {
 		node = (Node) e.getSource();

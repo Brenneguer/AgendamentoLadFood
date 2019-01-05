@@ -16,12 +16,12 @@ public final class ConsultaDao {
 	PreparedStatement query = null;
 	ResultSet rs = null;
 	String sql = "";
-	
+	List<VisitaTecnica> listaVisita;
 	public List<VisitaTecnica> consultaPorData(LocalDate dataInicioSelect, LocalDate dataFimSelect) {
 		conn = Connector.abrirConexao();
 		sql = "SELECT * FROM visita_tecnica WHERE data_inicio BETWEEN (?) AND (?)";
 		VisitaTecnica v = null;
-		List<VisitaTecnica> listaVisita = new ArrayList<>();
+		listaVisita = new ArrayList<>();
 		
 		try {
 			query = conn.prepareStatement(sql);
@@ -48,6 +48,25 @@ public final class ConsultaDao {
 			Connector.fecharConexao(conn, query, rs);
 		}
 		return listaVisita;
+	}
+	
+	public List<VisitaTecnica> consultaCobradas(List<VisitaTecnica> lista) {
+		List<VisitaTecnica> listaCobradas = new ArrayList<>();
+			for (VisitaTecnica v : lista) {
+				if (v.getLad() == true ) {
+					listaCobradas.add(v);
+				}
+			}
+		return listaCobradas;
+	}
+	public List<VisitaTecnica> consultaTecnico(List<VisitaTecnica> lista, String tecnico) {
+		List<VisitaTecnica> listaVisitaTecnico = new ArrayList<VisitaTecnica>();
+		for (VisitaTecnica v : lista) {
+			if (v.getTecnico().equalsIgnoreCase(tecnico)) {
+				listaVisitaTecnico.add(v);
+			}
+		}
+		return listaVisitaTecnico;
 	}
 	
 	

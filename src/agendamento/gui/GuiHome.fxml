@@ -18,7 +18,7 @@
 							</font>
 						</Button>
 						<Button mnemonicParsing="false" prefHeight="100.0" prefWidth="350.0" visible="false" />
-						<Button fx:id="consultarVisitaBotao" mnemonicParsing="false" prefHeight="100.0" prefWidth="350.0" text="Consultar Visita">
+						<Button fx:id="consultarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelaConsultaVisita" prefHeight="100.0" prefWidth="350.0" text="Consultar Visita">
 							<font>
 								<Font name="Comic Sans MS" size="29.0" />
 							</font>

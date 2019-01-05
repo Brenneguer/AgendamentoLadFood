@@ -133,6 +133,7 @@ public class GuiControllerDeletarVisita {
 			colunaSituacao.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String> ("situacao"));
 			colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
 			
+			
 			tabela.setItems(observableVisita);
 			
 		}
