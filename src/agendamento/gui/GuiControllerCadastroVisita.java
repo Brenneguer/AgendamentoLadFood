@@ -9,17 +9,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-// Referenced classes of package agendamento.gui:
-//            CriarView, GuiHome
 
 public class GuiControllerCadastroVisita {
 	@FXML
-	private AnchorPane cadastroVisita;
-	@FXML
 	private Label title;
+	@FXML
+	private VBox labels;
+	@FXML
+	private VBox textFilds;
+	
 	@FXML
 	private TextField numeroChamado;
 	@FXML
@@ -40,6 +42,10 @@ public class GuiControllerCadastroVisita {
 	private Button cancel;
 	@FXML
 	private Button inicio;
+	@FXML
+	private Button noticeBack;
+	@FXML
+	private Pane notice;
 
 	public void selectInicio(ActionEvent e) {
 		Node n = (Node) e.getSource();
@@ -59,22 +65,36 @@ public class GuiControllerCadastroVisita {
 			v.setIdEmpresa(Integer.parseInt(tarefaPai.getText()));
 			v.setSituacao(situacao.getText());
 			v.setLad(isCobrada.isSelected());
-			new VisitaTecnicaDao().salvar(v);
-			cancelarButton(event);
+			if (new VisitaTecnicaDao().salvar(v) == true) {
+				numeroChamado.clear();
+				tecnico.clear();
+				dataInicio.clear();
+				dataFim.clear();
+				tarefaPai.clear();
+				situacao.clear();
+				isCobrada.setSelected(false);
+			}
 		} catch (RuntimeException e) {
-			selectInicio(event);
+			System.out.println("entrei no cath");
+			isCobrada.setSelected(false);
+			labels.setVisible(false);
+			textFilds.setVisible(false);
+			notice.setVisible(true);
 		}
+	}
+	
+	@FXML
+	public void selectNoticeBack(ActionEvent e) {
+		notice.setVisible(false);
+		labels.setVisible(true);
+		textFilds.setVisible(true);
+		System.out.println("notice back");
 	}
 
 	public void cancelarButton(ActionEvent e) {
-		numeroChamado.clear();
-		tecnico.clear();
-		dataInicio.clear();
-		dataFim.clear();
-		tarefaPai.clear();
-		situacao.clear();
+		labels.setVisible(false);
+		textFilds.setVisible(false);
 		isCobrada.setSelected(false);
-		new GuiHome().chamarTelaHome(e);
 	}
 
 }

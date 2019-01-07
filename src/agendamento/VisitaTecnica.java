@@ -9,7 +9,16 @@ public class VisitaTecnica {
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
 	private String tecnico;
-	private int idEmpresa;
+	private Integer idEmpresa;
+
+	public Integer getIdEmpresa() {
+		return idEmpresa;
+	}
+
+	public void setIdEmpresa(Integer idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
+
 	private Boolean lad;
 	private String situacao;
 
@@ -70,14 +79,6 @@ public class VisitaTecnica {
 
 	}
 
-	public int getIdEmpresa() {
-		return idEmpresa;
-	}
-
-	public void setIdEmpresa(int idEmpresa) {
-		this.idEmpresa = idEmpresa;
-	}
-
 	public String getSituacao() {
 		return situacao;
 	}
@@ -85,7 +86,6 @@ public class VisitaTecnica {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
-	
 
 	public String toString() {
 		return (new StringBuilder("\nNumero Chamado: ")).append(getNumeroChamado()).append("\tEmpresa: ")

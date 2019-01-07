@@ -12,21 +12,25 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import agendamento.VisitaTecnica;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 	private Connection conn;
 	private PreparedStatement query;
 	private ResultSet rs;
 	private String sql;
-
-	public void salvar(VisitaTecnica obj) {
+	private Alert alert;
+	public boolean salvar(VisitaTecnica obj) {
 		VisitaTecnica v = buscarPorNumeroChamado(obj.getNumeroChamado());
 		conn = Connector.abrirConexao();
 		sql = "INSERT INTO visita_tecnica (numero_chamado, data_inicio, data_fim, id_empresa, tecnico, is_lad, situacao) VALUES (?,?,?,?,?,?,?)";
+		boolean resultado = false;
 		if (v != null) {
-			JOptionPane.showMessageDialog(null, "Já temos uma visita com esse chamado, crie uma nova tarefa.",
-					"Visita Existente", 1);
-			return;
+			alert = new Alert(AlertType.INFORMATION, "Já temos uma visita com esse chamado, crie uma nova tarefa.");
+			alert.setTitle("PROBLEMA AO SALVAR");
+			alert.show();
+			return resultado;
 		}
 		try {
 			query = conn.prepareStatement(sql);
@@ -38,39 +42,54 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 			query.setBoolean(6, obj.getLad());
 			query.setString(7, obj.getSituacao());
 			int insert = query.executeUpdate();
-			if (insert > 0)
-				JOptionPane.showMessageDialog(null, "Visita Tecnica Salva.", "Salvar", 2);
+			if (insert > 0) {
+				alert = new Alert(AlertType.INFORMATION, "Visita Tecnica Salva.");
+				alert.setTitle("Sucesso");
+				alert.setHeaderText("Yes!");
+				alert.show();
+				resultado = true;
+			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
 			Connector.fecharConexao(conn, query, rs);
 		}
+		return resultado;
 	}
 
-	public void deletar(int numero) {
+	public boolean deletar(int numero) {
 		VisitaTecnica v = buscarPorNumeroChamado(numero);
 		conn = Connector.abrirConexao();
 		sql = "DELETE FROM visita_tecnica where numero_chamado = ?";
+		boolean bool = false;
 		if (v == null) {
-			JOptionPane.showMessageDialog(null, "Visita inexistente", "Info", 1);
-			return;
+			alert = new Alert(AlertType.INFORMATION, "Visita inexistente");
+			alert.setTitle("Ops!");
+			alert.setHeaderText("Falha ao salvar");
+			alert.show();
+			return bool;
 		}
 		int resposta = JOptionPane.showConfirmDialog(null, "Realmente deseja deletar? Não existe opção desfazer.",
 				"CONFIRMAÇÃO DE EXCLUSÃO", 0);
 		if (resposta != 0) {
-			return;
+			return bool;
 		}
 		try {
 			query = conn.prepareStatement(sql);
 			query.setInt(1, numero);
 			int delete = query.executeUpdate();
-			if (delete > 0)
+			if (delete > 0) {
 				JOptionPane.showMessageDialog(null, "Visita Tecnica excluida", "Exclusao.", 2);
+				bool = true;
+			}
 		} catch (SQLException e) {
+			
 			throw new RuntimeException(e);
+		
 		} finally {
 			Connector.fecharConexao(conn, query, rs);
 		}
+		return bool;
 	}
 
 	public List<VisitaTecnica> listarTodos() {

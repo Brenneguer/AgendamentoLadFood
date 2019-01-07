@@ -1,8 +1,6 @@
 package agendamento.gui;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 import agendamento.VisitaTecnica;
 import agendamento.dao.VisitaTecnicaDao;
@@ -10,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
@@ -23,7 +20,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class GuiControllerDeletarVisita implements Initializable {
+public class GuiControllerDeletarVisita {
 	@FXML
 	private TitledPane principal;
 	@FXML
@@ -70,23 +67,32 @@ public class GuiControllerDeletarVisita implements Initializable {
 	public void selectButtonBuscar(ActionEvent action) {
 		try {
 			VisitaTecnica v = new VisitaTecnicaDao().buscarPorNumeroChamado(Integer.parseInt(numeroChamado.getText()));
+			notice.setVisible(false);
 			System.out.println(v.getLad());
-			adicionarArrayList();
+			adicionarVisitaTableView(v);
 			tabela.setVisible(true);
 			System.out.println(v.toString());
+			if (confirmarDelete.isPressed()) {
+				selectButtonExcluir(action);
+			}
 		} catch (RuntimeException e) {
+			tabela.setVisible(false);
 			notice.setVisible(true);
-			buscar.setVisible(false);
 			System.out.println("não achei");
-
 		}
 	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	
+	@FXML
+	public void selectButtonExcluir(ActionEvent event) {
+		System.out.println("Confirmei delete chamado: "+numeroChamado.getText());
+		if (new VisitaTecnicaDao().deletar(Integer.parseInt(numeroChamado.getText())) == true) {
+			numeroChamado.clear();
+			tabela.setVisible(false);
+		};
 		
-
+		
 	}
+	
 	
 	public void adicionarVisitaTableView(VisitaTecnica v) {
 		if(!observableVisita.isEmpty()) {
@@ -126,6 +132,7 @@ public class GuiControllerDeletarVisita implements Initializable {
 			colunaDataFim.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataFim"));
 			colunaSituacao.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String> ("situacao"));
 			colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
+			
 			
 			tabela.setItems(observableVisita);
 			
