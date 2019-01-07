@@ -65,13 +65,14 @@ public class ConsultaDao {
 			
 			while (rs.next()) {
 				v = new VisitaTecnica();
-				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-				v.setDataInicio(LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setIdVisitaTecnica(rs.getInt("id_visita_tecnica"));
 				v.setNumeroChamado(rs.getInt("numero_chamado"));
-				v.setIdEmpresa(rs.getInt("id_empresa"));
-				v.setSituacao(rs.getString("situacao"));
+				v.setDataInicio(LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				v.setIdEmpresa(rs.getInt("id_empresa"));	
+				v.setTecnico(rs.getString("tecnico"));
 				v.setLad(rs.getBoolean("is_lad"));
+				v.setSituacao(rs.getString("situacao"));
 				
 				listaVisita.add(v);
 			}
@@ -114,6 +115,36 @@ public class ConsultaDao {
 			}
 		}
 		return listaContentChamado;
+	}
+	
+	public List<VisitaTecnica> consultaTecnico(String tecnico) {
+		List<VisitaTecnica> listaVisitaTecnico = new ArrayList<>();
+		conn = Connector.abrirConexao();
+		sql = "SELECT * FROM visita_tecnica WHERE tecnico LIKE ?";
+		VisitaTecnica v = null;
+		
+		try {
+			query = conn.prepareStatement(sql);
+			query.setString(1, "%"+tecnico+"%");
+			rs = query.executeQuery();
+			
+			while (rs.next()) {
+				v = new VisitaTecnica();
+				v.setIdVisitaTecnica(rs.getInt("id_visita_tecnica"));
+				v.setNumeroChamado(rs.getInt("numero_chamado"));
+				v.setDataInicio(LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				v.setIdEmpresa(rs.getInt("id_empresa"));
+				v.setTecnico(rs.getString("tecnico"));
+				v.setLad(rs.getBoolean("is_lad"));
+				v.setSituacao(rs.getString("situacao"));
+				
+				listaVisitaTecnico.add(v);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return listaVisitaTecnico;
 	}
 	
 }

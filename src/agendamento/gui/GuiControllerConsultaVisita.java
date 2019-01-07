@@ -34,8 +34,6 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	private TextField dataFim;
 	@FXML
-	private CheckBox isCobrada;
-	@FXML
 	private Button consulta;
 
 	@FXML
@@ -58,6 +56,18 @@ public class GuiControllerConsultaVisita {
 	private ObservableList<VisitaTecnica> observableVisita = FXCollections.observableArrayList();
 
 	@FXML
+	private CheckBox agruparDataInicio;
+	@FXML
+	private CheckBox agruparDataFim;
+	@FXML
+	private CheckBox agruparEmpresa;
+	@FXML
+	private CheckBox agruparSituacao;
+	@FXML
+	private CheckBox agruparTecnico;
+	@FXML
+	private CheckBox agruparCobrada;
+	@FXML
 	private Button inicio;
 
 	@FXML
@@ -71,8 +81,15 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	public void selectConsulta(ActionEvent action) {
 
-		System.out.println(pesquisar(dataInicio, dataFim, numeroChamado, tecnico, isCobrada).toString());
-		tabela.setVisible(true);
+		try {
+			List<VisitaTecnica> v = pesquisar(dataInicio, dataFim, numeroChamado, tecnico);
+			System.out.println(v.toString());
+			agruparPor(action);
+			adicionarArrayList(v);
+			tabela.setVisible(true);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void adicionarArrayList(List<VisitaTecnica> lista) {
@@ -85,6 +102,7 @@ public class GuiControllerConsultaVisita {
 
 			colunaTecnico.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tecnico"));
 			colunaNumeroChamado.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("numeroChamado"));
+			System.out.println(v.getIdEmpresa());
 			colunaEmpresa.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("idEmpresa"));
 			colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
 			colunaDataInicio.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataInicio"));
@@ -94,10 +112,21 @@ public class GuiControllerConsultaVisita {
 		}
 	}
 
-	public List<VisitaTecnica> pesquisar(TextField dataInicio, TextField dataFim, TextField numeroChamado, TextField Tecnico,
-			CheckBox caixaSelect) {
+	/**
+	 * faz as pesquisas
+	 * 
+	 * @param dataInicio
+	 * @param dataFim
+	 * @param numeroChamado
+	 * @param Tecnico
+	 * @return
+	 */
+	public List<VisitaTecnica> pesquisar(TextField dataInicio, TextField dataFim, TextField numeroChamado,
+			TextField Tecnico) {
+
 		ConsultaDao cd = new ConsultaDao();
 		List<VisitaTecnica> listaVisita = null;
+
 		if (numeroChamado.getText().equals("") && dataInicio.getText().equals("") && dataFim.getText().equals("")
 				&& Tecnico.getText().equals("")) {
 			Alert alert = new Alert(AlertType.INFORMATION,
@@ -105,19 +134,58 @@ public class GuiControllerConsultaVisita {
 			alert.setTitle("Consulta invalida");
 			alert.setHeaderText("Informação util.");
 			alert.show();
-		}
-		
-		if (!numeroChamado.getText().equals("") && !dataInicio.getText().equals("") && !dataFim.getText().equals("")) {
-			//return//
-			List<VisitaTecnica> temp = cd.consultaPorData(LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+
+		} else if (!numeroChamado.getText().equals("") && !dataInicio.getText().equals("")
+				&& !dataFim.getText().equals("")) {
+			List<VisitaTecnica> temp = cd.consultaPorData(
+					LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
 					LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-			System.out.printf("Consultando por temp %s",temp.toString());
 			return cd.consultaPorChamado(temp, Integer.parseInt(numeroChamado.getText()));
 		} else if (!numeroChamado.getText().equals("")) {
 			return cd.consultaPorChamado(Integer.parseInt(numeroChamado.getText()));
+		} else if (!dataFim.getText().equals("") && !dataInicio.getText().equals("")) {
+			return cd.consultaPorData(LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+					LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		} else if (!tecnico.getText().equals("") && !dataInicio.getText().equals("") && !dataFim.getText().equals("")) {
+			return cd.consultaTecnico(
+					cd.consultaPorData(LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+							LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))),
+					tecnico.getText());
+		} else if (!tecnico.getText().equals("") && dataInicio.getText().equals("") && dataFim.getText().equals("")) {
+			return cd.consultaTecnico(tecnico.getText());
 		}
-		
 		return listaVisita;
 	}
 
+	/**
+	 * Faz os filtros
+	 */
+	public void agruparPor(ActionEvent e) {
+
+		colunaTecnico.setVisible(false);
+		colunaEmpresa.setVisible(false);
+		colunaCobrada.setVisible(false);
+		colunaDataInicio.setVisible(false);
+		colunaDataFim.setVisible(false);
+		colunaSituacao.setVisible(false);
+
+		if (agruparDataInicio.isSelected()) {
+			colunaDataInicio.setVisible(true);
+		}
+		if (agruparDataFim.isSelected()) {
+			colunaDataFim.setVisible(true);
+		}
+		if (agruparTecnico.isSelected()) {
+			colunaTecnico.setVisible(true);
+		}
+		if (agruparEmpresa.isSelected()) {
+			colunaEmpresa.setVisible(true);
+		}
+		if (agruparCobrada.isSelected()) {
+			colunaCobrada.setVisible(true);
+		}
+		if (agruparSituacao.isSelected()) {
+			colunaSituacao.setVisible(true);
+		}
+	}
 }
