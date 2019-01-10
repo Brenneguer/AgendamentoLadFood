@@ -26,7 +26,11 @@ public class CriarView {
 			System.out.println("tela criada por criarViewer");
 			stage.setMaximized(true);
 			stage.show();
+<<<<<<< HEAD
 
+=======
+			stage.setMaximized(true);
+>>>>>>> 85b8557aad7dfed9b3fdc3f8332cab0b5eda9f13
 		} catch (IOException e) {
 			System.err.println("deu ruim");
 			e.printStackTrace();
