@@ -83,7 +83,6 @@ public class GuiControllerConsultaVisita {
 
 		try {
 			List<VisitaTecnica> v = pesquisar(dataInicio, dataFim, numeroChamado, tecnico);
-			System.out.println(v.toString());
 			agruparPor(action);
 			adicionarArrayList(v);
 			tabela.setVisible(true);
@@ -97,6 +96,7 @@ public class GuiControllerConsultaVisita {
 			observableVisita.clear();
 			System.out.println("não era vazia");
 		}
+		try {
 		for (VisitaTecnica v : lista) {
 			observableVisita.add(v);
 
@@ -109,6 +109,9 @@ public class GuiControllerConsultaVisita {
 			colunaDataFim.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataFim"));
 			colunaSituacao.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("situacao"));
 			tabela.setItems(observableVisita);
+		}
+		} catch (NullPointerException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -161,13 +164,16 @@ public class GuiControllerConsultaVisita {
 	 * Faz os filtros
 	 */
 	public void agruparPor(ActionEvent e) {
+		
+		if (observableVisita.isEmpty() == false) {
+			colunaTecnico.setVisible(false);
+			colunaEmpresa.setVisible(false);
+			colunaCobrada.setVisible(false);
+			colunaDataInicio.setVisible(false);
+			colunaDataFim.setVisible(false);
+			colunaSituacao.setVisible(false);
+		}
 
-		colunaTecnico.setVisible(false);
-		colunaEmpresa.setVisible(false);
-		colunaCobrada.setVisible(false);
-		colunaDataInicio.setVisible(false);
-		colunaDataFim.setVisible(false);
-		colunaSituacao.setVisible(false);
 
 		if (agruparDataInicio.isSelected()) {
 			colunaDataInicio.setVisible(true);

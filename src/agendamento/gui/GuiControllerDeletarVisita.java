@@ -54,12 +54,15 @@ public class GuiControllerDeletarVisita {
 	private ContextMenu noticeSelect;
 	@FXML
 	private MenuItem noticeMenuItem;
+	
+	
 
 	@FXML
 	public void selectInicio(ActionEvent action) {
 		Node n = (Node) action.getSource();
 		Stage stage = (Stage) n.getScene().getWindow();
 		String envio = "/agendamento/gui/GuiHome.fxml";
+		
 		(new CriarView()).criarTela(stage, envio);
 	}
 

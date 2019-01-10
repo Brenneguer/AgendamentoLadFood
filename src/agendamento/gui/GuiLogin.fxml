@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" blendMode="DIFFERENCE" cache="true" cacheHint="SCALE" depthTest="ENABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="agendamento.gui.GuiLogin">
+		<AnchorPane blendMode="MULTIPLY" maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="1278.0">
+   <children>
+      <VBox fx:id="textFields" blendMode="OVERLAY" layoutX="575.0" layoutY="225.0" prefHeight="150.0" prefWidth="250.0" spacing="25.0">
+         <children>
+            <TextField fx:id="email" alignment="CENTER" prefHeight="60.0" prefWidth="275.0" promptText="e-mail">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="senha" alignment="CENTER" prefHeight="60.0" prefWidth="275.0" promptText="senha">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="login" mnemonicParsing="false" onAction="#selectLogin" prefHeight="27.0" prefWidth="91.0" text="Login">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <VBox fx:id="labels" layoutX="424.0" layoutY="223.0" prefHeight="150.0" prefWidth="138.0" spacing="25.0">
+         <children>
+            <Label prefHeight="60.0" prefWidth="275.0" text="Usuario">
+               <font>
+                  <Font name="Comic Sans MS" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="70.0" prefWidth="275.0" text="Senha">
+               <font>
+                  <Font name="Comic Sans MS" size="16.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="esqueciSenha" text="Esqueci a senha" textAlignment="CENTER">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </VBox>
+   </children>
+		</AnchorPane>
+
+</HBox>
