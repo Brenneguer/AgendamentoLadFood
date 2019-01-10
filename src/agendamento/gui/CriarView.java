@@ -22,12 +22,11 @@ public class CriarView {
 			stage.setWidth(bound.getWidth());
 			stage.setHeight(bound.getHeight());
 			stage.setScene(scene);
-//			stage.setResizable(false);
 			stage.setTitle("LAD CAD");
 			System.out.println("tela criada por criarViewer");
 			
 			stage.show();
-//			stage.setMaximized(true);
+			stage.setMaximized(true);
 		} catch (IOException e) {
 			System.err.println("deu ruim");
 			e.printStackTrace();

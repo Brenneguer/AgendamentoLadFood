@@ -23,10 +23,9 @@ public class Executor extends Application {
 			stage.setWidth(bound.getWidth());
 			stage.setHeight(bound.getHeight());
 			stage.setScene(scene);
-//			stage.setResizable(false);
 			stage.setTitle("LAD CAD");
 			stage.show();
-//			stage.setMaximized(true);
+			stage.setMaximized(true);
 		} catch (IOException e) {
 			System.err.println("deu ruim");
 			e.printStackTrace();
