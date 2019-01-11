@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import agendamento.ChaveEstrangeiraException;
 import agendamento.Usuario;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -22,7 +21,7 @@ public class UsuarioDao implements IDao<Usuario> {
 	String sql = "";
 
 	@Override
-	public boolean salvar(Usuario istance) throws ChaveEstrangeiraException {
+	public boolean salvar(Usuario istance) {
 		Usuario u = buscarUsuario(istance.getMail());
 		if (u != null) {
 			Alert alert = new Alert(AlertType.ERROR, "Ja temos esse usuário cadastrado.");
@@ -31,8 +30,15 @@ public class UsuarioDao implements IDao<Usuario> {
 			alert.show();
 			return false;
 		}
+		if(istance.getSobrenome().equals("") || istance.getSenha().contentEquals("") || istance.getNome().equals("") || istance.getCpf().equals("") || istance.getMail().equals("")) {
+			Alert alert = new Alert(AlertType.ERROR, "Insira informações validas.");
+			alert.setHeaderText("Ooops.");
+			alert.setTitle("ERROR");
+			alert.show();
+			return false;
+		}
 		conn = Connector.abrirConexao();
-		sql = "INSERT INTO users (nome, sobrenome, mail, senha) VALUES (?,?,?,?)";
+		sql = "INSERT INTO users (nome, sobrenome, mail, senha, cpf) VALUES (?,?,?,?,?)";
 		boolean bool = false;
 
 		try {
@@ -40,9 +46,11 @@ public class UsuarioDao implements IDao<Usuario> {
 			query.setString(1, istance.getNome());
 			query.setString(2, istance.getSobrenome());
 			query.setString(3, istance.getMail());
+			query.setString(5, istance.getCpf());
 			if (encriptografar(istance.getSenha()) != null) {
 				query.setString(4, encriptografar(istance.getSenha()));
 			}
+			
 			int insert = 0;
 			insert = query.executeUpdate();
 			System.out.println("insert");
@@ -63,6 +71,11 @@ public class UsuarioDao implements IDao<Usuario> {
 		return bool;
 	}
 
+	/**
+	 * buscar usuario somente por e-mail
+	 * @param mail
+	 * @return User
+	 */
 	public Usuario buscarUsuario(String mail) {
 		Usuario u = null;
 		sql = "SELECT * FROM users WHERE mail = ?";
@@ -77,7 +90,8 @@ public class UsuarioDao implements IDao<Usuario> {
 				u.setIdUsuario(rs.getInt("id_usuario"));
 				u.setNome(rs.getString("nome"));
 				u.setSobrenome(rs.getString("sobrenome"));
-				u.setMail(rs.getString("mail"));				
+				u.setMail(rs.getString("mail"));
+				u.setCpf(rs.getString("cpf"));
 			}
 		} catch (SQLException e) {
 			e.getMessage();
@@ -113,6 +127,7 @@ public class UsuarioDao implements IDao<Usuario> {
 				u.setNome(rs.getString("nome"));
 				u.setSobrenome(rs.getString("sobrenome"));
 				u.setMail(rs.getString("mail"));
+				u.setCpf(rs.getString("cpf"));
 				list.add(u);
 			}
 		} catch (SQLException e) {
@@ -139,7 +154,6 @@ public class UsuarioDao implements IDao<Usuario> {
 			rs = query.executeQuery();
 			if (rs.next()) {
 				log = rs.getString("senha");
-				System.out.println(encriptografar(senha));
 				if(encriptografar(senha).equals(log)) {
 					bool = true;
 				}

@@ -6,31 +6,41 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" blendMode="EXCLUSION" cache="true" cacheHint="SCALE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="agendamento.gui.GuiHome">
+<HBox alignment="CENTER" blendMode="EXCLUSION" cache="true" cacheHint="SCALE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiHome">
 <AnchorPane prefHeight="720.0" prefWidth="1280.0">
 			<children>
-      <HBox prefHeight="100.0" prefWidth="200.0" />
-				<VBox alignment="CENTER" layoutX="442.0" layoutY="135.0">
-					<children>
-						<Button fx:id="cadastrarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelacadastrarVisita" prefHeight="100.0" prefWidth="350.0" text="Cadastrar Visita">
-							<font>
-								<Font name="Comic Sans MS" size="29.0" />
-							</font>
-						</Button>
-						<Button mnemonicParsing="false" prefHeight="100.0" prefWidth="350.0" visible="false" />
-						<Button fx:id="consultarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelaConsultaVisita" prefHeight="100.0" prefWidth="350.0" text="Consultar Visita">
-							<font>
-								<Font name="Comic Sans MS" size="29.0" />
-							</font>
-						</Button>
-						<Button mnemonicParsing="false" prefHeight="100.0" prefWidth="350.0" visible="false" />
-						<Button fx:id="deletarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelaDeletarVisita" prefHeight="100.0" prefWidth="350.0" text="Deletar Visita">
-							<font>
-								<Font name="Comic Sans MS" size="29.0" />
-							</font>
-						</Button>
-					</children>
-				</VBox>
+         <HBox alignment="CENTER" layoutX="256.0" layoutY="138.0" prefHeight="433.0" prefWidth="760.0" spacing="50.0">
+            <children>
+               <VBox alignment="CENTER" prefHeight="280.0" prefWidth="340.0" spacing="45.0">
+                  <children>
+                     <Button fx:id="cadastrarVisitaBotao1" mnemonicParsing="false" onAction="#chamarTelacadastrarVisita" prefHeight="100.0" prefWidth="350.0" text="Cadastrar Visita">
+                        <font>
+                           <Font name="Comic Sans MS" size="29.0" />
+                        </font>
+                     </Button>
+                     <Button fx:id="consultarVisitaBotao1" mnemonicParsing="false" onAction="#chamarTelaConsultaVisita" prefHeight="100.0" prefWidth="350.0" text="Consultar Visita">
+                        <font>
+                           <Font name="Comic Sans MS" size="29.0" />
+                        </font>
+                     </Button>
+                  </children>
+               </VBox>
+      				<VBox alignment="CENTER" prefHeight="280.0" prefWidth="340.0" spacing="45.0">
+      					<children>
+      						<Button fx:id="cadastrarFuncionarioBotao" mnemonicParsing="false" onAction="#chamarTelacadastrarVisita" prefHeight="100.0" prefWidth="350.0" text="Cadastrar Funcionario">
+      							<font>
+      								<Font name="Comic Sans MS" size="29.0" />
+      							</font>
+      						</Button>
+      						<Button fx:id="deletarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelaDeletarVisita" prefHeight="100.0" prefWidth="350.0" text="Deletar Visita">
+      							<font>
+      								<Font name="Comic Sans MS" size="29.0" />
+      							</font>
+      						</Button>
+      					</children>
+      				</VBox>
+            </children>
+         </HBox>
 			</children>
 		</AnchorPane>
 </HBox>

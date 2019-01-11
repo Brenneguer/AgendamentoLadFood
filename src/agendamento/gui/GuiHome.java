@@ -21,7 +21,7 @@ public class GuiHome {
 	@FXML
 	Stage stage = null;
 	@FXML
-	private Button cadastrarVisitaBotao;
+	private Button cadastrarVisitaBotao, cadastrarFuncionarioBotao;
 	@FXML
 	private Button consultarVisitaBotao;
 	@FXML
@@ -33,32 +33,65 @@ public class GuiHome {
 		node = (Node) e.getSource();
 		stage = (Stage) node.getScene().getWindow();
 		envia = "/agendamento/gui/GuiHome.fxml";
-		(new CriarView()).criarTela(stage, envia);
-		envia = "";
+		System.out.println(GuiLogin.logado);
+		if (GuiLogin.logado == true) {
+			(new CriarView()).criarTela(stage, envia);
+			envia = "";
+		} else {
+			chamarTelaLogin(e);
+		}
 	}
 	
 	public void chamarTelaConsultaVisita(ActionEvent e) {
 		node = (Node) e.getSource();
 		stage = (Stage) node.getScene().getWindow();
 		envia = "/agendamento/gui/GuiConsultaVisitaHome.fxml";
-		(new CriarView()).criarTela(stage, envia);
+		if (GuiLogin.logado == true) {
+			(new CriarView()).criarTela(stage, envia);
+			envia = "";
+		} else {
+			chamarTelaLogin(e);
+		}
 	}
 	@FXML
 	public void chamarTelacadastrarVisita(ActionEvent e) {
 		node = (Node) e.getSource();
 		stage = (Stage) node.getScene().getWindow();
 		envia = "/agendamento/gui/GuiCadastroVisitaTecnica.fxml";
+		if (GuiLogin.logado == true) {
+			(new CriarView()).criarTela(stage, envia);
+			envia = "";
+		} else {
+			chamarTelaLogin(e);
+		}
+	}
+	
+	@FXML
+	public void chamarTelaCadastrarFuncionario(ActionEvent e) {
+		node = (Node) e.getSource();
+		stage = (Stage) node.getScene().getWindow();
+		envia = "/agendamento/gui/GuiCadastroUsuario.fxml";
 		(new CriarView()).criarTela(stage, envia);
 		envia = "";
 	}
-
-
 
 	public void chamarTelaDeletarVisita(ActionEvent e) {
 		node = (Node) e.getSource();
 		stage = (Stage) node.getScene().getWindow();
 		envia = "/agendamento/gui/GuiDeletarVisita.fxml";
+		if (GuiLogin.logado == true) {
+			(new CriarView()).criarTela(stage, envia);
+			envia = "";
+		} else {
+			chamarTelaLogin(e);
+		}
+	}
+	
+	public static void chamarTelaLogin(ActionEvent e) {
+		Node node = (Node) e.getSource();
+		Stage stage = (Stage) node.getScene().getWindow();
+		String envia = "/agendamento/gui/GuiLogin.fxml";
 		(new CriarView()).criarTela(stage, envia);
-		envia = "";
+		envia = "";		
 	}
 }
