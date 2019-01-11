@@ -23,17 +23,18 @@ public class GuiControllerCadastroVisita {
 	private VBox textFilds;
 	
 	@FXML
-	private TextField numeroChamado;
+	public TextField numeroChamado;
 	@FXML
-	private TextField tecnico;
+	public TextField tecnico;
 	@FXML
-	private TextField dataInicio;
+	public TextField dataInicio;
 	@FXML
-	private TextField dataFim;
+	public TextField dataFim;
 	@FXML
-	private TextField tarefaPai;
+	public TextField tarefaPai;
 	@FXML
-	private TextField situacao;
+	public TextField situacao;
+	
 	@FXML
 	private CheckBox isCobrada;
 	@FXML
@@ -82,6 +83,7 @@ public class GuiControllerCadastroVisita {
 			notice.setVisible(true);
 		}
 	}
+	
 	
 	@FXML
 	public void selectNoticeBack(ActionEvent e) {

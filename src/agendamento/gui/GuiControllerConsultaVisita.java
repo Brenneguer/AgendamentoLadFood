@@ -37,6 +37,8 @@ public class GuiControllerConsultaVisita {
 	private Button consulta;
 	@FXML
 	private Button editar;
+	
+	private int edit;
 
 	@FXML
 	private TableView<VisitaTecnica> tabela;
@@ -90,12 +92,17 @@ public class GuiControllerConsultaVisita {
 			tabela.setVisible(true);
 			editar.setVisible(true);
 		} catch (RuntimeException e) {
+			Alert alert = new Alert(AlertType.INFORMATION, "Por favor, insira informações para consulta.");
+			alert.setTitle("Lista vazia");
+			alert.setHeaderText("Consulta Invalida.");
 			e.printStackTrace();
 		}
 	}
 	
 	@FXML
 	public void selectEditar(ActionEvent action) {
+		colunaSituacao.setEditable(true);
+		
 		
 	}
 
