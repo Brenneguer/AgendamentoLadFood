@@ -41,7 +41,6 @@ public class GuiControllerCadastroUsuario {
 	private Pane notice;
 
 	public void selectInicio(ActionEvent e) {
-		System.out.println();
 		if (GuiLogin.logado == true)
 			new GuiHome().chamarTelaHome(e);
 		else
@@ -66,7 +65,6 @@ public class GuiControllerCadastroUsuario {
 				sobrenome.clear();
 			}
 		} catch (RuntimeException e) {
-			System.out.println("entrei no cath");
 			labels.setVisible(false);
 			textFilds.setVisible(false);
 			notice.setVisible(true);
@@ -78,13 +76,11 @@ public class GuiControllerCadastroUsuario {
 		notice.setVisible(false);
 		labels.setVisible(true);
 		textFilds.setVisible(true);
-		System.out.println("notice back");
 	}
 
 	public void cancelarButton(ActionEvent e) {
 		labels.setVisible(false);
 		textFilds.setVisible(false);
-
 	}
 
 }

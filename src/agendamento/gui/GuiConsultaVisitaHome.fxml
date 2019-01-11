@@ -11,8 +11,8 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" blendMode="EXCLUSION" cache="true" cacheHint="SCALE" depthTest="ENABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="agendamento.gui.GuiControllerConsultaVisita">
-				<AnchorPane maxHeight="853.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
+<HBox alignment="CENTER" blendMode="EXCLUSION" cache="true" cacheHint="SCALE" depthTest="ENABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiControllerConsultaVisita">
+				<AnchorPane cache="true" cacheHint="SCALE" depthTest="ENABLE" maxHeight="853.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
 					<children>
 						<Rectangle arcHeight="20.0" arcWidth="20.0" fill="#22548000" height="302.0" layoutX="246.0" layoutY="61.0" smooth="false" stroke="#00000047" strokeLineCap="ROUND" strokeType="INSIDE" width="791.0" />
 						<Label layoutX="272.0" layoutY="210.0" prefHeight="22.0" prefWidth="110.0" text="Agrupar por">
@@ -118,6 +118,11 @@
             <Font name="Comic Sans MS" size="16.0" />
          </font>
       </Button>
+         <Button contentDisplay="CENTER" focusTraversable="false" layoutX="772.0" layoutY="368.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="125.0" text="Editar">
+            <font>
+               <Font name="Comic Sans MS" size="16.0" />
+            </font>
+         </Button>
 			
                   					</children>
 				</AnchorPane>

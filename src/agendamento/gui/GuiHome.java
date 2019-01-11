@@ -26,6 +26,8 @@ public class GuiHome {
 	private Button consultarVisitaBotao;
 	@FXML
 	private Button deletarVisitaBotao;
+	@FXML
+	private Button sair;
 	String envia;
 
 
@@ -33,7 +35,6 @@ public class GuiHome {
 		node = (Node) e.getSource();
 		stage = (Stage) node.getScene().getWindow();
 		envia = "/agendamento/gui/GuiHome.fxml";
-		System.out.println(GuiLogin.logado);
 		if (GuiLogin.logado == true) {
 			(new CriarView()).criarTela(stage, envia);
 			envia = "";
@@ -73,6 +74,12 @@ public class GuiHome {
 		envia = "/agendamento/gui/GuiCadastroUsuario.fxml";
 		(new CriarView()).criarTela(stage, envia);
 		envia = "";
+	}
+	
+	@FXML
+	public void selectSair(ActionEvent e) {
+		chamarTelaLogin(e);
+		GuiLogin.logado = false;
 	}
 
 	public void chamarTelaDeletarVisita(ActionEvent e) {

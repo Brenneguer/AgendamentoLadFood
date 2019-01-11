@@ -35,6 +35,8 @@ public class GuiControllerConsultaVisita {
 	private TextField dataFim;
 	@FXML
 	private Button consulta;
+	@FXML
+	private Button editar;
 
 	@FXML
 	private TableView<VisitaTecnica> tabela;
@@ -86,15 +88,20 @@ public class GuiControllerConsultaVisita {
 			agruparPor(action);
 			adicionarArrayList(v);
 			tabela.setVisible(true);
+			editar.setVisible(true);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	public void selectEditar(ActionEvent action) {
+		
 	}
 
 	public void adicionarArrayList(List<VisitaTecnica> lista) {
 		if (!observableVisita.isEmpty()) {
 			observableVisita.clear();
-			System.out.println("não era vazia");
 		}
 		try {
 		for (VisitaTecnica v : lista) {
@@ -102,7 +109,6 @@ public class GuiControllerConsultaVisita {
 
 			colunaTecnico.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tecnico"));
 			colunaNumeroChamado.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("numeroChamado"));
-			System.out.println(v.getIdEmpresa());
 			colunaEmpresa.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("idEmpresa"));
 			colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
 			colunaDataInicio.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataInicio"));

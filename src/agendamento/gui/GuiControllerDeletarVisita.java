@@ -62,7 +62,6 @@ public class GuiControllerDeletarVisita {
 		Node n = (Node) action.getSource();
 		Stage stage = (Stage) n.getScene().getWindow();
 		String envio = "/agendamento/gui/GuiHome.fxml";
-		
 		(new CriarView()).criarTela(stage, envio);
 	}
 
@@ -71,23 +70,20 @@ public class GuiControllerDeletarVisita {
 		try {
 			VisitaTecnica v = new VisitaTecnicaDao().buscarPorNumeroChamado(Integer.parseInt(numeroChamado.getText()));
 			notice.setVisible(false);
-			System.out.println(v.getLad());
 			adicionarVisitaTableView(v);
 			tabela.setVisible(true);
-			System.out.println(v.toString());
+			confirmarDelete.setVisible(true);
 			if (confirmarDelete.isPressed()) {
 				selectButtonExcluir(action);
 			}
 		} catch (RuntimeException e) {
 			tabela.setVisible(false);
 			notice.setVisible(true);
-			System.out.println("não achei");
 		}
 	}
 	
 	@FXML
 	public void selectButtonExcluir(ActionEvent event) {
-		System.out.println("Confirmei delete chamado: "+numeroChamado.getText());
 		if (new VisitaTecnicaDao().deletar(Integer.parseInt(numeroChamado.getText())) == true) {
 			numeroChamado.clear();
 			tabela.setVisible(false);
@@ -100,7 +96,6 @@ public class GuiControllerDeletarVisita {
 	public void adicionarVisitaTableView(VisitaTecnica v) {
 		if(!observableVisita.isEmpty()) {
 			observableVisita.clear();
-			System.out.println("não era vazia");
 		}
 		
 		observableVisita.add(v);
@@ -111,7 +106,7 @@ public class GuiControllerDeletarVisita {
 		colunaDataFim.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataFim"));
 		colunaSituacao.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String> ("situacao"));
 		colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
-		
+	
 		tabela.setItems(observableVisita);
 	}// fim adicionar
 	
@@ -121,7 +116,6 @@ public class GuiControllerDeletarVisita {
 	 */
 	public void adicionarArrayList() {
 		if(!observableVisita.isEmpty()) {
-			System.out.println("cheia");
 			observableVisita.clear();
 		}
 		VisitaTecnicaDao v = new VisitaTecnicaDao();

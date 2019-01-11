@@ -88,7 +88,6 @@ public class GuiControllerCadastroVisita {
 		notice.setVisible(false);
 		labels.setVisible(true);
 		textFilds.setVisible(true);
-		System.out.println("notice back");
 	}
 
 	public void cancelarButton(ActionEvent e) {
