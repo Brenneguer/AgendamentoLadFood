@@ -46,7 +46,7 @@ public class GuiHome {
 	public void chamarTelaConsultaVisita(ActionEvent e) {
 		node = (Node) e.getSource();
 		stage = (Stage) node.getScene().getWindow();
-		envia = "/agendamento/gui/GuiConsultaVisitaHome.fxml";
+		envia = "/agendamento/gui/GuiConsultaVisita.fxml";
 		if (GuiLogin.logado == true) {
 			(new CriarView()).criarTela(stage, envia);
 			envia = "";

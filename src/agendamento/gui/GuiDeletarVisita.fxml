@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" blendMode="EXCLUSION" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="669.0" prefWidth="1278.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="agendamento.gui.GuiControllerDeletarVisita">
+<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiControllerDeletarVisita">
 	         <children>
-      		<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="1278.0">
+      		<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
       			<children>
                   <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#22548000" height="312.0" layoutX="246.0" layoutY="298.0" smooth="false" stroke="#1c4b9e08" strokeLineJoin="BEVEL" strokeType="INSIDE" width="791.0" />
                   <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#22548000" height="122.0" layoutX="246.0" layoutY="149.0" smooth="false" stroke="#00000047" strokeLineCap="ROUND" strokeType="INSIDE" width="791.0" />
