@@ -13,7 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
 public class GuiControllerCadastroVisita {
 	@FXML
 	private Label title;
@@ -21,20 +20,20 @@ public class GuiControllerCadastroVisita {
 	private VBox labels;
 	@FXML
 	private VBox textFilds;
-	
+
 	@FXML
-	public TextField numeroChamado;
+	private TextField numeroChamado;
 	@FXML
-	public TextField tecnico;
+	private TextField tecnico;
 	@FXML
-	public TextField dataInicio;
+	private TextField dataInicio;
 	@FXML
-	public TextField dataFim;
+	private TextField dataFim;
 	@FXML
-	public TextField tarefaPai;
+	private TextField tarefaPai;
 	@FXML
-	public TextField situacao;
-	
+	private TextField situacao;
+
 	@FXML
 	private CheckBox isCobrada;
 	@FXML
@@ -58,6 +57,7 @@ public class GuiControllerCadastroVisita {
 	@FXML
 	public void salvarButton(ActionEvent event) {
 		try {
+			
 			VisitaTecnica v = new VisitaTecnica();
 			v.setNumeroChamado(Integer.parseInt(numeroChamado.getText()));
 			v.setTecnico(tecnico.getText());
@@ -84,12 +84,12 @@ public class GuiControllerCadastroVisita {
 		}
 	}
 	
-	
 	@FXML
 	public void selectNoticeBack(ActionEvent e) {
 		notice.setVisible(false);
 		labels.setVisible(true);
 		textFilds.setVisible(true);
+		
 	}
 
 	public void cancelarButton(ActionEvent e) {
@@ -97,5 +97,6 @@ public class GuiControllerCadastroVisita {
 		textFilds.setVisible(false);
 		isCobrada.setSelected(false);
 	}
+
 
 }

@@ -185,4 +185,25 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 		return lista;
 	}
 
+	public Boolean update(VisitaTecnica v) {
+		Boolean bool = false;
+		conn = Connector.abrirConexao();
+		sql = "UPDATE visita_tecnica SET numero_chamado = ?, tecnico = ?, data_inicio = ?, data_fim = ?, id_empresa = ?, situacao = ?, is_lad = ? WHERE id_visita_tecnica = ?";
+		int update = 0;
+		
+		try { 
+			query = conn.prepareStatement(sql);
+			query.setInt(1, v.getNumeroChamado());
+			query.setString(2, v.getTecnico());
+			query.setString(3, v.getDataInicio().toString());
+			query.setString(4, v.getDataFim().toString());
+			
+			
+		} catch (SQLException e) {
+			e.getMessage();
+			throw new RuntimeException(e);
+		}
+		
+		return bool;
+	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import agendamento.VisitaTecnica;
 import agendamento.dao.ConsultaDao;
+import agendamento.dao.VisitaTecnicaDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,13 +19,22 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class GuiControllerConsultaVisita {
+	DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
+	private int idVisita = 0;
+	/**
+	 * parte Consulta de visitas
+	 */
 	@FXML
-	private TitledPane background;
+	private HBox telaEditarVisita;
+	
 	@FXML
 	private TextField numeroChamado;
 	@FXML
@@ -35,10 +45,6 @@ public class GuiControllerConsultaVisita {
 	private TextField dataFim;
 	@FXML
 	private Button consulta;
-	@FXML
-	private Button editar;
-	
-	private int edit;
 
 	@FXML
 	private TableView<VisitaTecnica> tabela;
@@ -73,7 +79,44 @@ public class GuiControllerConsultaVisita {
 	private CheckBox agruparCobrada;
 	@FXML
 	private Button inicio;
+	@FXML
+	private Button editar;
 
+	/**
+	 * parte editar visita
+	 */
+	@FXML
+	private HBox telaConsultaVisita;
+	@FXML
+	private VBox labels;
+	@FXML
+	private VBox textFilds;
+
+	@FXML
+	private TextField numeroChamadoEditar;
+	@FXML
+	private TextField tecnicoEditar;
+	@FXML
+	private TextField dataInicioEditar;
+	@FXML
+	private TextField dataFimEditar;
+	@FXML
+	private TextField tarefaPaiEditar;
+	@FXML
+	private TextField situacaoEditar;
+
+	@FXML
+	private CheckBox isCobradaEditar;
+	@FXML
+	private Button save;
+	@FXML
+	private Button cancel;
+	@FXML
+	private Button noticeBack;
+	@FXML
+	private Pane notice;
+
+	
 	@FXML
 	public void selectInicio(ActionEvent action) {
 		Node n = (Node) action.getSource();
@@ -84,7 +127,6 @@ public class GuiControllerConsultaVisita {
 
 	@FXML
 	public void selectConsulta(ActionEvent action) {
-
 		try {
 			List<VisitaTecnica> v = pesquisar(dataInicio, dataFim, numeroChamado, tecnico);
 			agruparPor(action);
@@ -98,31 +140,89 @@ public class GuiControllerConsultaVisita {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	public void selectEditar(ActionEvent action) {
-		colunaSituacao.setEditable(true);
-		
+		System.out.println(tabela.getSelectionModel().getSelectedItem().getIdVisitaTecnica());
+		telaConsultaVisita.setVisible(false);
+		setarValoresTextView();
+		telaEditarVisita.setVisible(true);
+	}
+	
+	@FXML
+	public void salvarButton(ActionEvent event) {
+		System.out.println(idVisita);
+		try {
+			VisitaTecnica v = new VisitaTecnica();
+			v.setIdVisitaTecnica(idVisita);
+			v.setNumeroChamado(Integer.parseInt(numeroChamadoEditar.getText()));
+			v.setTecnico(tecnicoEditar.getText());
+			v.setDataInicio(dataInicioEditar.getText());
+			v.setDataFim(dataFimEditar.getText());
+			v.setIdEmpresa(Integer.parseInt(tarefaPaiEditar.getText()));
+			v.setSituacao(situacaoEditar.getText());
+			v.setLad(isCobradaEditar.isSelected());
+			if (new VisitaTecnicaDao().salvar(v) == true) {
+				numeroChamadoEditar.clear();
+				tecnicoEditar.clear();
+				dataInicioEditar.clear();
+				dataFimEditar.clear();
+				tarefaPaiEditar.clear();
+				situacaoEditar.clear();
+				isCobradaEditar.setSelected(false);
+			}
+		} catch (RuntimeException e) {
+			System.out.println("entrei no cath");
+			isCobradaEditar.setSelected(false);
+			labels.setVisible(false);
+			textFilds.setVisible(false);
+			notice.setVisible(true);
+		}
+	}
+	
+	public void setarValoresTextView() {
+		numeroChamadoEditar.setText(""+tabela.getSelectionModel().getSelectedItem().getNumeroChamado());
+		tecnicoEditar.setText(tabela.getSelectionModel().getSelectedItem().getTecnico());
+		dataInicioEditar.setText(tabela.getSelectionModel().getSelectedItem().getDataInicio().format(format));
+		dataFimEditar.setText(tabela.getSelectionModel().getSelectedItem().getDataFim().format(format));
+		tarefaPaiEditar.setText(""+tabela.getSelectionModel().getSelectedItem().getIdEmpresa());
+		situacaoEditar.setText(tabela.getSelectionModel().getSelectedItem().getSituacao());
+		isCobradaEditar.setSelected(tabela.getSelectionModel().getSelectedItem().getLad());
+		idVisita = tabela.getSelectionModel().getSelectedItem().getNumeroChamado();
 		
 	}
-
+	@FXML
+	public void selectNoticeBack(ActionEvent e) {
+		notice.setVisible(false);
+		labels.setVisible(true);
+		textFilds.setVisible(true);
+		
+	}
+	
+	public void cancelarButton(ActionEvent e) {
+		telaConsultaVisita.setVisible(true);
+		telaEditarVisita.setVisible(false);
+		
+	}
+	
 	public void adicionarArrayList(List<VisitaTecnica> lista) {
 		if (!observableVisita.isEmpty()) {
 			observableVisita.clear();
 		}
 		try {
-		for (VisitaTecnica v : lista) {
-			observableVisita.add(v);
+			for (VisitaTecnica v : lista) {
+				observableVisita.add(v);
 
-			colunaTecnico.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tecnico"));
-			colunaNumeroChamado.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("numeroChamado"));
-			colunaEmpresa.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("idEmpresa"));
-			colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
-			colunaDataInicio.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataInicio"));
-			colunaDataFim.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataFim"));
-			colunaSituacao.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("situacao"));
-			tabela.setItems(observableVisita);
-		}
+				colunaTecnico.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tecnico"));
+				colunaNumeroChamado
+						.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("numeroChamado"));
+				colunaEmpresa.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("idEmpresa"));
+				colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
+				colunaDataInicio.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataInicio"));
+				colunaDataFim.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataFim"));
+				colunaSituacao.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("situacao"));
+				tabela.setItems(observableVisita);
+			}
 		} catch (NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
@@ -177,7 +277,7 @@ public class GuiControllerConsultaVisita {
 	 * Faz os filtros
 	 */
 	public void agruparPor(ActionEvent e) {
-		
+
 		if (observableVisita.isEmpty() == false) {
 			colunaTecnico.setVisible(false);
 			colunaEmpresa.setVisible(false);
@@ -186,7 +286,6 @@ public class GuiControllerConsultaVisita {
 			colunaDataFim.setVisible(false);
 			colunaSituacao.setVisible(false);
 		}
-
 
 		if (agruparDataInicio.isSelected()) {
 			colunaDataInicio.setVisible(true);

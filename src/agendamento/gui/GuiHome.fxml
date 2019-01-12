@@ -43,7 +43,7 @@
          </HBox>
          <Button fx:id="sair" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectSair" prefHeight="31.0" prefWidth="175.0" text="Sair">
             <font>
-               <Font name="Comic Sans MS" size="14.0" />
+               <Font name="Comic Sans MS" size="18.0" />
             </font>
          </Button>
 			</children>
