@@ -88,10 +88,7 @@ public class VisitaTecnica {
 	}
 
 	public String toString() {
-		return (new StringBuilder("\nNumero Chamado: ")).append(getNumeroChamado()).append("\tEmpresa: ")
-				.append(getIdEmpresa()).append("\tSitua\347\343o: ").append(getSituacao()).append("\tTecnico: ")
-				.append(getTecnico()).append("\tData Inicio: ").append(getDataInicio()).append("\tData Prevista: ")
-				.append(getDataFim()).toString();
+		return ""+tecnico+";"+numeroChamado+";"+idEmpresa+";"+dataInicio.toString()+";"+dataFim.toString()+";"+situacao+";"+lad;
 	}
 
 }

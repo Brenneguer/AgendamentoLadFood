@@ -4,8 +4,11 @@ import agendamento.Usuario;
 import agendamento.dao.UsuarioDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -27,7 +30,7 @@ public class GuiControllerCadastroUsuario {
 	@FXML
 	private TextField mail;
 	@FXML
-	private TextField senha;
+	private PasswordField senha;
 
 	@FXML
 	private Button save;
@@ -58,6 +61,10 @@ public class GuiControllerCadastroUsuario {
 			u.setSobrenome(sobrenome.getText());
 			u.setCpf(cpf.getText());
 			if (new UsuarioDao().salvar(u) == true) {
+				Alert alert = new Alert(AlertType.CONFIRMATION, "Cadastro relizado com sucesso.");
+				alert.setTitle("SUCESSO!");
+				alert.setHeaderText("Novo Usuario.");
+				alert.show();
 				nome.clear();
 				mail.clear();
 				cpf.clear();
@@ -68,6 +75,7 @@ public class GuiControllerCadastroUsuario {
 			labels.setVisible(false);
 			textFilds.setVisible(false);
 			notice.setVisible(true);
+			e.printStackTrace();
 		}
 	}
 
@@ -81,6 +89,7 @@ public class GuiControllerCadastroUsuario {
 	public void cancelarButton(ActionEvent e) {
 		labels.setVisible(false);
 		textFilds.setVisible(false);
+		GuiHome.chamarTelaLogin(e);
 	}
 
 }

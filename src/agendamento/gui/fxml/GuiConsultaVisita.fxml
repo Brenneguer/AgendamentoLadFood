@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiControllerConsultaVisita">
+<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="agendamento.gui.GuiControllerConsultaVisita">
    <AnchorPane cache="true" cacheHint="SCALE" depthTest="ENABLE" maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
       <children>
          <HBox fx:id="telaConsultaVisita" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
@@ -21,6 +21,12 @@
             				<AnchorPane cache="true" cacheHint="SCALE" depthTest="ENABLE" maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
             					<children>
             						<Rectangle arcHeight="20.0" arcWidth="20.0" fill="#22548000" height="302.0" layoutX="246.0" layoutY="61.0" smooth="false" stroke="#00000047" strokeLineCap="ROUND" strokeType="INSIDE" width="791.0" />
+            						
+                              						<Button fx:id="inicio" blendMode="DARKEN" depthTest="ENABLE" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectInicio" prefHeight="31.0" prefWidth="175.0" text="Inicio">
+               				<font>
+                  				<Font name="Comic Sans MS" size="18.0" />
+               				</font>
+            			</Button>
             						<Label layoutX="272.0" layoutY="210.0" prefHeight="22.0" prefWidth="110.0" text="Agrupar por">
             							<font>
             								<Font name="Comic Sans MS" size="14.0" />
@@ -97,12 +103,21 @@
             								<Font name="Comic Sans MS" size="12.0" />
             							</font>
             						</CheckBox>
-            						
-                              						<Button fx:id="inicio" blendMode="DARKEN" depthTest="ENABLE" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectInicio" prefHeight="31.0" prefWidth="175.0" text="Inicio">
-               				<font>
-                  				<Font name="Comic Sans MS" size="18.0" />
-               				</font>
-            			</Button>
+                  <Button fx:id="consulta" layoutX="916.0" layoutY="368.0" mnemonicParsing="false" onAction="#selectConsulta" prefHeight="33.0" prefWidth="125.0" text="Consultar">
+                     <font>
+                        <Font name="Comic Sans MS" size="16.0" />
+                     </font>
+                  </Button>
+                     <Button fx:id="editar" contentDisplay="CENTER" focusTraversable="false" layoutX="780.0" layoutY="368.0" mnemonicParsing="false" onAction="#selectEditar" prefHeight="33.0" prefWidth="125.0" text="Editar" visible="false">
+                        <font>
+                           <Font name="Comic Sans MS" size="16.0" />
+                        </font>
+                     </Button>
+                     <Button fx:id="export" contentDisplay="CENTER" focusTraversable="false" layoutX="199.0" layoutY="623.0" mnemonicParsing="false" onAction="#exportar" prefHeight="2.0" prefWidth="56.0" text="csv" visible="false">
+                        <font>
+                           <Font name="Comic Sans MS" size="12.0" />
+                        </font>
+                     </Button>
             			
                                           	<TableView fx:id="tabela" cache="true" layoutX="200.0" layoutY="434.0" maxWidth="893.0" minWidth="780.0" opacity="0.91" pickOnBounds="false" prefHeight="180.0" prefWidth="880.0" visible="false">
             					<columnResizePolicy>
@@ -119,16 +134,6 @@
             					</columns>
             
                               				</TableView>
-                  <Button fx:id="consulta" layoutX="916.0" layoutY="368.0" mnemonicParsing="false" onAction="#selectConsulta" prefHeight="33.0" prefWidth="125.0" text="Consultar">
-                     <font>
-                        <Font name="Comic Sans MS" size="16.0" />
-                     </font>
-                  </Button>
-                     <Button fx:id="editar" contentDisplay="CENTER" focusTraversable="false" layoutX="770.0" layoutY="368.0" mnemonicParsing="false" onAction="#selectEditar" prefHeight="33.0" prefWidth="125.0" text="Editar">
-                        <font>
-                           <Font name="Comic Sans MS" size="16.0" />
-                        </font>
-                     </Button>
             			
                     </children>
                    </AnchorPane>

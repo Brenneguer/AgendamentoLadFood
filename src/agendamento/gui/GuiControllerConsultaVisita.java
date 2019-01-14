@@ -27,14 +27,15 @@ import javafx.stage.Stage;
 
 public class GuiControllerConsultaVisita {
 	DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
+	List<VisitaTecnica> listaVisita = null;
+	static int cont = 0;
 	private int idVisita = 0;
 	/**
 	 * parte Consulta de visitas
 	 */
 	@FXML
 	private HBox telaEditarVisita;
-	
+
 	@FXML
 	private TextField numeroChamado;
 	@FXML
@@ -112,16 +113,17 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	private Button cancel;
 	@FXML
+	private Button export;
+	@FXML
 	private Button noticeBack;
 	@FXML
 	private Pane notice;
 
-	
 	@FXML
 	public void selectInicio(ActionEvent action) {
 		Node n = (Node) action.getSource();
 		Stage stage = (Stage) n.getScene().getWindow();
-		String envio = "/agendamento/gui/GuiHome.fxml";
+		String envio = "/agendamento/gui/fxml/GuiHome.fxml";
 		(new CriarView()).criarTela(stage, envio);
 	}
 
@@ -130,106 +132,59 @@ public class GuiControllerConsultaVisita {
 		try {
 			List<VisitaTecnica> v = pesquisar(dataInicio, dataFim, numeroChamado, tecnico);
 			agruparPor(action);
-			adicionarArrayList(v);
-			tabela.setVisible(true);
-			editar.setVisible(true);
+			if (adicionarArrayList(v) == true) {
+				tabela.setVisible(true);
+				editar.setVisible(true);
+				export.setVisible(true);
+			} else
+				throw new RuntimeException();
 		} catch (RuntimeException e) {
 			Alert alert = new Alert(AlertType.INFORMATION, "Por favor, insira informações para consulta.");
 			alert.setTitle("Lista vazia");
-			alert.setHeaderText("Consulta Invalida.");
-			e.printStackTrace();
+			alert.setHeaderText("Não consiguimos localizar sua consulta.");
+			tabela.setVisible(false);
+			editar.setVisible(false);
+			export.setVisible(false);
+			e.getMessage();
 		}
 	}
 
+	/**
+	 * ativa a edição dos recursos
+	 * 
+	 * @param action
+	 */
 	@FXML
 	public void selectEditar(ActionEvent action) {
-		System.out.println(tabela.getSelectionModel().getSelectedItem().getIdVisitaTecnica());
-		telaConsultaVisita.setVisible(false);
-		setarValoresTextView();
-		telaEditarVisita.setVisible(true);
-	}
-	
-	@FXML
-	public void salvarButton(ActionEvent event) {
-		System.out.println(idVisita);
-		try {
-			VisitaTecnica v = new VisitaTecnica();
-			v.setIdVisitaTecnica(idVisita);
-			v.setNumeroChamado(Integer.parseInt(numeroChamadoEditar.getText()));
-			v.setTecnico(tecnicoEditar.getText());
-			v.setDataInicio(dataInicioEditar.getText());
-			v.setDataFim(dataFimEditar.getText());
-			v.setIdEmpresa(Integer.parseInt(tarefaPaiEditar.getText()));
-			v.setSituacao(situacaoEditar.getText());
-			v.setLad(isCobradaEditar.isSelected());
-			if (new VisitaTecnicaDao().salvar(v) == true) {
-				numeroChamadoEditar.clear();
-				tecnicoEditar.clear();
-				dataInicioEditar.clear();
-				dataFimEditar.clear();
-				tarefaPaiEditar.clear();
-				situacaoEditar.clear();
-				isCobradaEditar.setSelected(false);
-			}
-		} catch (RuntimeException e) {
-			System.out.println("entrei no cath");
-			isCobradaEditar.setSelected(false);
-			labels.setVisible(false);
-			textFilds.setVisible(false);
-			notice.setVisible(true);
+		if (setarValoresTextView() == true) {
+			telaEditarVisita.setVisible(true);
+			telaConsultaVisita.setVisible(false);
 		}
+		else {
+			telaConsultaVisita.setVisible(true);
+		}
+			
 	}
-	
-	public void setarValoresTextView() {
-		numeroChamadoEditar.setText(""+tabela.getSelectionModel().getSelectedItem().getNumeroChamado());
-		tecnicoEditar.setText(tabela.getSelectionModel().getSelectedItem().getTecnico());
-		dataInicioEditar.setText(tabela.getSelectionModel().getSelectedItem().getDataInicio().format(format));
-		dataFimEditar.setText(tabela.getSelectionModel().getSelectedItem().getDataFim().format(format));
-		tarefaPaiEditar.setText(""+tabela.getSelectionModel().getSelectedItem().getIdEmpresa());
-		situacaoEditar.setText(tabela.getSelectionModel().getSelectedItem().getSituacao());
-		isCobradaEditar.setSelected(tabela.getSelectionModel().getSelectedItem().getLad());
-		idVisita = tabela.getSelectionModel().getSelectedItem().getNumeroChamado();
-		
-	}
+
 	@FXML
 	public void selectNoticeBack(ActionEvent e) {
 		notice.setVisible(false);
 		labels.setVisible(true);
 		textFilds.setVisible(true);
-		
-	}
-	
-	public void cancelarButton(ActionEvent e) {
-		telaConsultaVisita.setVisible(true);
-		telaEditarVisita.setVisible(false);
-		
-	}
-	
-	public void adicionarArrayList(List<VisitaTecnica> lista) {
-		if (!observableVisita.isEmpty()) {
-			observableVisita.clear();
-		}
-		try {
-			for (VisitaTecnica v : lista) {
-				observableVisita.add(v);
-
-				colunaTecnico.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tecnico"));
-				colunaNumeroChamado
-						.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("numeroChamado"));
-				colunaEmpresa.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("idEmpresa"));
-				colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
-				colunaDataInicio.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataInicio"));
-				colunaDataFim.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataFim"));
-				colunaSituacao.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("situacao"));
-				tabela.setItems(observableVisita);
-			}
-		} catch (NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
 	}
 
 	/**
-	 * faz as pesquisas
+	 * cancela a edição
+	 * 
+	 * @param ActionEvent action
+	 */
+	public void cancelarButton(ActionEvent e) {
+		telaConsultaVisita.setVisible(true);
+		telaEditarVisita.setVisible(false);
+	}
+
+	/**
+	 * faz as pesquisas no banco de dados de acordo com os parametros passados
 	 * 
 	 * @param dataInicio
 	 * @param dataFim
@@ -237,11 +192,11 @@ public class GuiControllerConsultaVisita {
 	 * @param Tecnico
 	 * @return
 	 */
-	public List<VisitaTecnica> pesquisar(TextField dataInicio, TextField dataFim, TextField numeroChamado,
+	private List<VisitaTecnica> pesquisar(TextField dataInicio, TextField dataFim, TextField numeroChamado,
 			TextField Tecnico) {
 
 		ConsultaDao cd = new ConsultaDao();
-		List<VisitaTecnica> listaVisita = null;
+		listaVisita = null;
 
 		if (numeroChamado.getText().equals("") && dataInicio.getText().equals("") && dataFim.getText().equals("")
 				&& Tecnico.getText().equals("")) {
@@ -256,21 +211,74 @@ public class GuiControllerConsultaVisita {
 			List<VisitaTecnica> temp = cd.consultaPorData(
 					LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
 					LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-			return cd.consultaPorChamado(temp, Integer.parseInt(numeroChamado.getText()));
+
+			listaVisita = cd.consultaPorChamado(temp, Integer.parseInt(numeroChamado.getText()));
+			return listaVisita;
+
 		} else if (!numeroChamado.getText().equals("")) {
-			return cd.consultaPorChamado(Integer.parseInt(numeroChamado.getText()));
+
+			listaVisita = cd.consultaPorChamado(Integer.parseInt(numeroChamado.getText()));
+			return listaVisita;
+
 		} else if (!dataFim.getText().equals("") && !dataInicio.getText().equals("")) {
-			return cd.consultaPorData(LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+
+			listaVisita = cd.consultaPorData(
+					LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
 					LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			return listaVisita;
+
 		} else if (!tecnico.getText().equals("") && !dataInicio.getText().equals("") && !dataFim.getText().equals("")) {
-			return cd.consultaTecnico(
+
+			listaVisita = cd.consultaTecnico(
 					cd.consultaPorData(LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
 							LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))),
 					tecnico.getText());
+
+			return listaVisita;
+
 		} else if (!tecnico.getText().equals("") && dataInicio.getText().equals("") && dataFim.getText().equals("")) {
-			return cd.consultaTecnico(tecnico.getText());
+
+			listaVisita = cd.consultaTecnico(tecnico.getText());
+			return listaVisita;
 		}
 		return listaVisita;
+	}
+
+	/**
+	 * adiciona as informções feitas pela consulta na table view
+	 * 
+	 * @param lista
+	 */
+	private boolean adicionarArrayList(List<VisitaTecnica> lista) {
+		boolean bool = false;
+		if (!observableVisita.isEmpty()) {
+			observableVisita.clear();
+		}
+		try {
+			if (!lista.isEmpty()) {
+				for (VisitaTecnica v : lista) {
+					observableVisita.add(v);
+
+					colunaTecnico.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tecnico"));
+					colunaNumeroChamado
+							.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("numeroChamado"));
+					colunaEmpresa.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("idEmpresa"));
+					colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
+					colunaDataInicio
+							.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataInicio"));
+					colunaDataFim.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataFim"));
+					colunaSituacao.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("situacao"));
+					tabela.setItems(observableVisita);
+
+				}
+				bool = true;
+			} else
+				bool = false;
+
+		} catch (NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
+		return bool;
 	}
 
 	/**
@@ -306,4 +314,94 @@ public class GuiControllerConsultaVisita {
 			colunaSituacao.setVisible(true);
 		}
 	}
+
+	/**
+	 * Adiciona os valores ao text field que serão editados pelo usuario
+	 */
+	private boolean setarValoresTextView() {
+		boolean bool = false;
+		try {
+			numeroChamadoEditar.setText("" + tabela.getSelectionModel().getSelectedItem().getNumeroChamado());
+			tecnicoEditar.setText(tabela.getSelectionModel().getSelectedItem().getTecnico());
+			dataInicioEditar.setText(tabela.getSelectionModel().getSelectedItem().getDataInicio().format(format));
+			dataFimEditar.setText(tabela.getSelectionModel().getSelectedItem().getDataFim().format(format));
+			tarefaPaiEditar.setText("" + tabela.getSelectionModel().getSelectedItem().getIdEmpresa());
+			situacaoEditar.setText(tabela.getSelectionModel().getSelectedItem().getSituacao());
+			isCobradaEditar.setSelected(tabela.getSelectionModel().getSelectedItem().getLad());
+			idVisita = tabela.getSelectionModel().getSelectedItem().getIdVisitaTecnica();
+			
+			bool = true;
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(AlertType.INFORMATION, "Para editar, você precisa selecionar uma linha da tabela.");
+			alert.setTitle("ERRO.");
+			alert.setHeaderText("Falha ao editar. Tente novamente!");
+			alert.show();
+		}
+		return bool;
+	}
+
+	/**
+	 * salva as edições feitas na visita
+	 * 
+	 * @param event
+	 */
+	@FXML
+	public void salvarButton(ActionEvent event) {
+
+		try {
+			VisitaTecnica v = new VisitaTecnica();
+			v.setIdVisitaTecnica(idVisita);
+			v.setNumeroChamado(Integer.parseInt(numeroChamadoEditar.getText()));
+			v.setTecnico(tecnicoEditar.getText());
+			v.setDataInicio(dataInicioEditar.getText());
+			v.setDataFim(dataFimEditar.getText());
+			v.setIdEmpresa(Integer.parseInt(tarefaPaiEditar.getText()));
+			v.setSituacao(situacaoEditar.getText());
+			v.setLad(isCobradaEditar.isSelected());
+			if (new VisitaTecnicaDao().update(v)) {
+				numeroChamadoEditar.clear();
+				tecnicoEditar.clear();
+				dataInicioEditar.clear();
+				dataFimEditar.clear();
+				tarefaPaiEditar.clear();
+				situacaoEditar.clear();
+				isCobradaEditar.setSelected(false);
+				telaConsultaVisita.setVisible(true);
+				telaEditarVisita.setVisible(false);
+				if (!observableVisita.isEmpty())
+					observableVisita.clear();
+			}
+		} catch (RuntimeException e) {
+			isCobradaEditar.setSelected(false);
+			labels.setVisible(false);
+			textFilds.setVisible(false);
+			notice.setVisible(true);
+		}
+	}
+
+//	@FXML
+//	public void exportar(ActionEvent action) {
+//		System.out.println("exportando");
+//		String caminho = "C:\\agendamentos\\visitaTecnica.csv";
+////		Path path =  
+//		try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho, true))) {
+//			for (VisitaTecnica v : listaVisita) {
+//				if (cont == 0) {
+//					System.out.println("ta dizendo que não existe");
+//					bw.write("tecnico; numero chamado; empresa; data inicio; data fim; situaca; cobrada");
+//					bw.newLine();
+//					bw.write(v.toString());
+//					bw.newLine();
+//					cont++;
+//				} else {
+//					bw.write(v.toString());
+//					bw.newLine();
+//				}
+//
+//			}
+//		} catch (IOException io) {
+//			io.getMessage();
+//		}
+//	}
+
 }

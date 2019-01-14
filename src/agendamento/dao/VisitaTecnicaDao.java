@@ -197,11 +197,27 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 			query.setString(2, v.getTecnico());
 			query.setString(3, v.getDataInicio().toString());
 			query.setString(4, v.getDataFim().toString());
-			
-			
+			query.setInt(5, v.getIdEmpresa());
+			query.setString(6, v.getSituacao());
+			query.setBoolean(7, v.getLad());
+			query.setInt(8, v.getIdVisitaTecnica());
+			update = query.executeUpdate();
+			if (update > 0) {
+				bool = true;
+				Alert alert = new Alert(AlertType.INFORMATION, "Visita tecnica editada com sucesso.");
+				alert.setTitle("Yes!");
+				alert.setHeaderText("Sucesso!");
+				alert.show();
+			} else System.out.println("algo errado no update");
 		} catch (SQLException e) {
+			Alert alert = new Alert(AlertType.INFORMATION, "Algo deu errado, tente novamente.");
+			alert.setTitle("Oops!");
+			alert.setHeaderText("Algo inesperado ocorreu.");
+			alert.show();
 			e.getMessage();
 			throw new RuntimeException(e);
+		} finally {
+			Connector.fecharConexao(conn, query, rs);
 		}
 		
 		return bool;

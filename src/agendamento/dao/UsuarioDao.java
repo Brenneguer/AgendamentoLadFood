@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import agendamento.Usuario;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -55,10 +53,6 @@ public class UsuarioDao implements IDao<Usuario> {
 			insert = query.executeUpdate();
 			System.out.println("insert");
 			if (insert > 0) {
-				Alert alert = new Alert(AlertType.INFORMATION, "Salvo com sucesso.");
-				alert.setHeaderText("CONFIRMAÇÃO!");
-				alert.setTitle("Sucesso.");
-				JOptionPane.showMessageDialog(null, "salvado");
 				bool = true;
 			}
 

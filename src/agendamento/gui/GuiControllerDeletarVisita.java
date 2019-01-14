@@ -61,7 +61,7 @@ public class GuiControllerDeletarVisita {
 	public void selectInicio(ActionEvent action) {
 		Node n = (Node) action.getSource();
 		Stage stage = (Stage) n.getScene().getWindow();
-		String envio = "/agendamento/gui/GuiHome.fxml";
+		String envio = "/agendamento/gui/fxml/GuiHome.fxml";
 		(new CriarView()).criarTela(stage, envio);
 	}
 
