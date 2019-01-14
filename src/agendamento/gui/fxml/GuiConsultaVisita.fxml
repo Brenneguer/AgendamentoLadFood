@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="agendamento.gui.GuiControllerConsultaVisita">
+<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiControllerConsultaVisita">
    <AnchorPane cache="true" cacheHint="SCALE" depthTest="ENABLE" maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
       <children>
          <HBox fx:id="telaConsultaVisita" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
@@ -72,7 +72,7 @@
             								<Font name="Comic Sans MS" size="12.0" />
             							</font>
             						</TextField>
-            						<Rectangle arcHeight="20.0" arcWidth="20.0" fill="#22548000" height="116.0" layoutX="395.0" layoutY="211.0" smooth="false" stroke="#00000047" strokeLineCap="ROUND" strokeType="INSIDE" width="585.0" />
+            						<Rectangle arcHeight="20.0" arcWidth="20.0" fill="#22548000" height="144.0" layoutX="395.0" layoutY="211.0" smooth="false" stroke="#00000047" strokeLineCap="ROUND" strokeType="INSIDE" width="585.0" />
             						<CheckBox fx:id="agruparDataInicio" layoutX="410.0" layoutY="221.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="85.0" text="Data Inicio">
             							<font>
             								<Font name="Comic Sans MS" size="12.0" />
@@ -120,15 +120,40 @@
             					</columnResizePolicy>
             					<columns>
             						<TableColumn fx:id="colunaNumeroChamado" editable="false" maxWidth="3500.0" prefWidth="127.0" resizable="true" text="Numero Chamado" />
-                        <TableColumn fx:id="colunaEmpresa" editable="false" maxWidth="3000.0" prefWidth="101.0" text="Empresa" visible="false" />
+                           			<TableColumn fx:id="colunaTipo" editable="false" maxWidth="3000.0" prefWidth="101.0" text="Tipo" visible="false" />
+                        			<TableColumn fx:id="colunaEmpresa" editable="false" maxWidth="3000.0" prefWidth="101.0" text="Empresa" visible="false" />
             						<TableColumn fx:id="colunaTecnico" editable="false" maxWidth="3000.0" prefWidth="124.0" resizable="true" text="Tecnico" visible="false" />
             						<TableColumn fx:id="colunaDataInicio" editable="false" maxWidth="3000.0" prefWidth="75.0" resizable="true" text="Data Inicio" visible="false" />
             						<TableColumn fx:id="colunaDataFim" editable="false" maxWidth="3000.0" prefWidth="75.0" resizable="true" text="Data Fim" visible="false" />
             						<TableColumn fx:id="colunaSituacao" editable="false" maxWidth="3000.0" prefWidth="196.0" resizable="true" text="Situação" visible="false" />
-                        <TableColumn fx:id="colunaCobrada" editable="false" maxWidth="2000.0" prefWidth="100.0" text="Cobrada" visible="false" />
+                        			<TableColumn fx:id="colunaCobrada" editable="false" maxWidth="2000.0" prefWidth="100.0" text="Cobrada" visible="false" />
             					</columns>
             
                               				</TableView>
+                     <HBox layoutX="272.0" layoutY="154.0" prefHeight="35.0" prefWidth="326.0" spacing="10.0">
+                        <children>
+                           <Label prefHeight="22.0" prefWidth="112.0" text="Tipo">
+                              <font>
+                                 <Font name="Comic Sans MS" size="14.0" />
+                              </font>
+                           </Label>
+                           <CheckBox fx:id="isImplantacao" mnemonicParsing="false" text="Implantação">
+                              <font>
+                                 <Font name="Comic Sans MS" size="13.0" />
+                              </font>
+                           </CheckBox>
+                           <CheckBox fx:id="isVisita" mnemonicParsing="false" text="Visita">
+                              <font>
+                                 <Font name="Comic Sans MS" size="13.0" />
+                              </font>
+                           </CheckBox>
+                        </children>
+                     </HBox>
+                     <CheckBox fx:id="agruparTipo" layoutX="410.0" layoutY="332.0" mnemonicParsing="false" text="Tipo">
+                        <font>
+                           <Font name="Comic Sans MS" size="12.0" />
+                        </font>
+                     </CheckBox>
             			
                     </children>
                    </AnchorPane>

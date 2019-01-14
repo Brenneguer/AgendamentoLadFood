@@ -47,7 +47,7 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	private Button consulta;
 	@FXML
-	private CheckBox implantacao, visita;
+	private CheckBox isImplantacao, isVisita;
 
 	@FXML
 	private TableView<VisitaTecnica> tabela;
@@ -124,6 +124,22 @@ public class GuiControllerConsultaVisita {
 	private Pane notice;
 
 	@FXML
+	public void selectionTipo() {
+		if (isVisita.isSelected() == true && isImplantacao.isSelected() == false) {
+			isImplantacao.setVisible(false);
+		} else if(isImplantacao.isSelected() == true && isVisita.isSelected() == false) {
+			isVisita.setVisible(false);
+		}
+		
+		if( isVisita.isSelected() == false) {
+			isImplantacao.setVisible(true);
+		}
+		if(isImplantacao.isSelected() == false) {
+			isVisita.setVisible(true);
+		}
+
+	}
+	@FXML
 	public void selectInicio(ActionEvent action) {
 		Node n = (Node) action.getSource();
 		Stage stage = (Stage) n.getScene().getWindow();
@@ -134,7 +150,7 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	public void selectConsulta(ActionEvent action) {
 		try {
-			List<VisitaTecnica> v = pesquisar(dataInicio, dataFim, numeroChamado, tecnico, implantacao, visita);
+			List<VisitaTecnica> v = pesquisar(dataInicio, dataFim, numeroChamado, tecnico, isImplantacao, isVisita);
 			agruparPor(action);
 			if (adicionarArrayList(v) == true) {
 				tabela.setVisible(true);
@@ -149,6 +165,7 @@ public class GuiControllerConsultaVisita {
 			tabela.setVisible(false);
 			editar.setVisible(false);
 			e.getMessage();
+			e.printStackTrace();
 		}
 	}
 
@@ -206,11 +223,12 @@ public class GuiControllerConsultaVisita {
 			Alert alert = new Alert(AlertType.INFORMATION,
 					"Você precisa inserir informações para consulta, insira um intervalo de datas.");
 			alert.setTitle("Consulta invalida");
-			alert.setHeaderText("Informação util.");
+			alert.setHeaderText("Ops.");
 			alert.show();
 
 		} else if (!numeroChamado.getText().equals("") && !dataInicio.getText().equals("")
 				&& !dataFim.getText().equals("")) {
+			//consulta data fim, data inicio, numero chamado;
 			List<VisitaTecnica> temp = cd.consultaPorData(
 					LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
 					LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -219,20 +237,20 @@ public class GuiControllerConsultaVisita {
 			return listaVisita;
 
 		} else if (!numeroChamado.getText().equals("")) {
-			
+			//consulta numero chamado
 			listaVisita = cd.consultaPorChamado(Integer.parseInt(numeroChamado.getText()));
 			
 			return listaVisita;
 
 		} else if (!dataFim.getText().equals("") && !dataInicio.getText().equals("")) {
-
+			//consulta data fim e data inicio
 			listaVisita = cd.consultaPorData(
 					LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
 					LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 			return listaVisita;
 
 		} else if (!tecnico.getText().equals("") && !dataInicio.getText().equals("") && !dataFim.getText().equals("")) {
-
+			//consulta data inicio, data fim e tecnico
 			listaVisita = cd.consultaTecnico(
 					cd.consultaPorData(LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
 							LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))),
@@ -241,7 +259,7 @@ public class GuiControllerConsultaVisita {
 			return listaVisita;
 
 		} else if (!tecnico.getText().equals("") && dataInicio.getText().equals("") && dataFim.getText().equals("")) {
-
+			//consulta Tecnico
 			listaVisita = cd.consultaTecnico(tecnico.getText());
 			return listaVisita;
 		}
