@@ -13,12 +13,12 @@
             <children>
                <VBox alignment="CENTER" prefHeight="280.0" prefWidth="340.0" spacing="45.0">
                   <children>
-                     <Button fx:id="cadastrarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelacadastrarVisita" prefHeight="100.0" prefWidth="350.0" text="Cadastrar Visita">
+                     <Button fx:id="cadastrarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelacadastrarVisita" prefHeight="100.0" prefWidth="350.0" text="Cadastrar">
                         <font>
                            <Font name="Comic Sans MS" size="29.0" />
                         </font>
                      </Button>
-                     <Button fx:id="consultarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelaConsultaVisita" prefHeight="100.0" prefWidth="350.0" text="Consultar Visita">
+                     <Button fx:id="consultarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelaConsultaVisita" prefHeight="100.0" prefWidth="350.0" text="Consultar">
                         <font>
                            <Font name="Comic Sans MS" size="29.0" />
                         </font>
@@ -32,7 +32,7 @@
       								<Font name="Comic Sans MS" size="29.0" />
       							</font>
       						</Button>
-      						<Button fx:id="deletarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelaDeletarVisita" prefHeight="100.0" prefWidth="350.0" text="Deletar Visita">
+      						<Button fx:id="deletarVisitaBotao" mnemonicParsing="false" onAction="#chamarTelaDeletarVisita" prefHeight="100.0" prefWidth="350.0" text="Deletar">
       							<font>
       								<Font name="Comic Sans MS" size="29.0" />
       							</font>

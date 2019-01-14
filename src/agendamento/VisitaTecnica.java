@@ -9,6 +9,7 @@ public class VisitaTecnica {
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
 	private String tecnico;
+	private String tipo;
 	private Integer idEmpresa;
 
 	public Integer getIdEmpresa() {
@@ -70,6 +71,14 @@ public class VisitaTecnica {
 		return tecnico;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public Boolean getLad() {
 		return lad;
 	}
@@ -88,7 +97,7 @@ public class VisitaTecnica {
 	}
 
 	public String toString() {
-		return ""+tecnico+";"+numeroChamado+";"+idEmpresa+";"+dataInicio.toString()+";"+dataFim.toString()+";"+situacao+";"+lad;
+		return ""+tecnico+";"+tipo+";"+numeroChamado+";"+idEmpresa+";"+dataInicio.toString()+";"+dataFim.toString()+";"+situacao+";"+lad;
 	}
 
 }

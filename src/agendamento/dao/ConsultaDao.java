@@ -34,6 +34,7 @@ public class ConsultaDao {
 				v = new VisitaTecnica();
 				v.setIdVisitaTecnica(rs.getInt("id_visita_tecnica"));
 				v.setNumeroChamado(rs.getInt("numero_chamado"));
+				v.setTipo(rs.getString("tipo"));
 				v.setDataInicio(
 						LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
@@ -67,6 +68,7 @@ public class ConsultaDao {
 				v = new VisitaTecnica();
 				v.setIdVisitaTecnica(rs.getInt("id_visita_tecnica"));
 				v.setNumeroChamado(rs.getInt("numero_chamado"));
+				v.setTipo(rs.getString("tipo"));
 				v.setDataInicio(LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setIdEmpresa(rs.getInt("id_empresa"));	
@@ -132,6 +134,7 @@ public class ConsultaDao {
 				v = new VisitaTecnica();
 				v.setIdVisitaTecnica(rs.getInt("id_visita_tecnica"));
 				v.setNumeroChamado(rs.getInt("numero_chamado"));
+				v.setTipo(rs.getString("tipo"));
 				v.setDataInicio(LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setIdEmpresa(rs.getInt("id_empresa"));
@@ -146,5 +149,8 @@ public class ConsultaDao {
 		}
 		return listaVisitaTecnico;
 	}
-	
+
+//	public List<VisitaTecnica> consultaTipo(){
+//		
+//	}
 }

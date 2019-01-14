@@ -46,11 +46,15 @@ public class GuiControllerConsultaVisita {
 	private TextField dataFim;
 	@FXML
 	private Button consulta;
+	@FXML
+	private CheckBox implantacao, visita;
 
 	@FXML
 	private TableView<VisitaTecnica> tabela;
 	@FXML
 	private TableColumn<VisitaTecnica, String> colunaTecnico;
+	@FXML
+	private TableColumn<VisitaTecnica, String> colunaTipo;	
 	@FXML
 	private TableColumn<VisitaTecnica, Integer> colunaNumeroChamado;
 	@FXML
@@ -76,6 +80,8 @@ public class GuiControllerConsultaVisita {
 	private CheckBox agruparSituacao;
 	@FXML
 	private CheckBox agruparTecnico;
+	@FXML
+	private CheckBox agruparTipo;
 	@FXML
 	private CheckBox agruparCobrada;
 	@FXML
@@ -128,7 +134,7 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	public void selectConsulta(ActionEvent action) {
 		try {
-			List<VisitaTecnica> v = pesquisar(dataInicio, dataFim, numeroChamado, tecnico);
+			List<VisitaTecnica> v = pesquisar(dataInicio, dataFim, numeroChamado, tecnico, implantacao, visita);
 			agruparPor(action);
 			if (adicionarArrayList(v) == true) {
 				tabela.setVisible(true);
@@ -190,7 +196,7 @@ public class GuiControllerConsultaVisita {
 	 * @return
 	 */
 	private List<VisitaTecnica> pesquisar(TextField dataInicio, TextField dataFim, TextField numeroChamado,
-			TextField Tecnico) {
+			TextField Tecnico, CheckBox implantacao, CheckBox visita) {
 
 		ConsultaDao cd = new ConsultaDao();
 		listaVisita = null;
@@ -213,8 +219,9 @@ public class GuiControllerConsultaVisita {
 			return listaVisita;
 
 		} else if (!numeroChamado.getText().equals("")) {
-
+			
 			listaVisita = cd.consultaPorChamado(Integer.parseInt(numeroChamado.getText()));
+			
 			return listaVisita;
 
 		} else if (!dataFim.getText().equals("") && !dataInicio.getText().equals("")) {
@@ -259,6 +266,7 @@ public class GuiControllerConsultaVisita {
 					colunaTecnico.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tecnico"));
 					colunaNumeroChamado
 							.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("numeroChamado"));
+					colunaTipo.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tipo"));
 					colunaEmpresa.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("idEmpresa"));
 					colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
 					colunaDataInicio
@@ -285,6 +293,7 @@ public class GuiControllerConsultaVisita {
 
 		if (observableVisita.isEmpty() == false) {
 			colunaTecnico.setVisible(false);
+			colunaTipo.setVisible(false);
 			colunaEmpresa.setVisible(false);
 			colunaCobrada.setVisible(false);
 			colunaDataInicio.setVisible(false);
@@ -294,6 +303,9 @@ public class GuiControllerConsultaVisita {
 
 		if (agruparDataInicio.isSelected()) {
 			colunaDataInicio.setVisible(true);
+		}
+		if (agruparTipo.isSelected()) {
+			colunaTipo.setVisible(true);
 		}
 		if (agruparDataFim.isSelected()) {
 			colunaDataFim.setVisible(true);

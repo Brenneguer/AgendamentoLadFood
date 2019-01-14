@@ -21,10 +21,11 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 	private ResultSet rs;
 	private String sql;
 	private Alert alert;
+	
 	public boolean salvar(VisitaTecnica obj) {
 		VisitaTecnica v = buscarPorNumeroChamado(obj.getNumeroChamado());
 		conn = Connector.abrirConexao();
-		sql = "INSERT INTO visita_tecnica (numero_chamado, data_inicio, data_fim, id_empresa, tecnico, is_lad, situacao) VALUES (?,?,?,?,?,?,?)";
+		sql = "INSERT INTO visita_tecnica (numero_chamado, tipo, data_inicio, data_fim, id_empresa, tecnico, is_lad, situacao) VALUES (?,?,?,?,?,?,?,?)";
 		boolean resultado = false;
 		if (v != null) {
 			alert = new Alert(AlertType.INFORMATION, "Já temos uma visita com esse chamado, crie uma nova tarefa.");
@@ -35,12 +36,13 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 		try {
 			query = conn.prepareStatement(sql);
 			query.setInt(1, obj.getNumeroChamado());
-			query.setString(2, obj.getDataInicio().toString());
-			query.setString(3, obj.getDataFim().toString());
-			query.setInt(4, obj.getIdEmpresa());
-			query.setString(5, obj.getTecnico());
-			query.setBoolean(6, obj.getLad());
-			query.setString(7, obj.getSituacao());
+			query.setString(2, obj.getTipo());
+			query.setString(3, obj.getDataInicio().toString());
+			query.setString(4, obj.getDataFim().toString());
+			query.setInt(5, obj.getIdEmpresa());
+			query.setString(6, obj.getTecnico());
+			query.setBoolean(7, obj.getLad());
+			query.setString(8, obj.getSituacao());
 			int insert = query.executeUpdate();
 			if (insert > 0) {
 				alert = new Alert(AlertType.INFORMATION, "Visita Tecnica Salva.");
@@ -103,6 +105,7 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 			while (rs.next()) {
 				v = new VisitaTecnica();
 				v.setIdVisitaTecnica(rs.getInt("id_visita_tecnica"));
+				v.setTipo(rs.getString("tipo"));
 				v.setNumeroChamado(rs.getInt("numero_chamado"));
 				v.setIdEmpresa(rs.getInt("id_empresa"));
 				v.setTecnico(rs.getString("tecnico"));
@@ -133,6 +136,7 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 			if (rs.next()) {
 				v = new VisitaTecnica();
 				v.setIdVisitaTecnica(rs.getInt("id_visita_tecnica"));
+				v.setTipo(rs.getString("tipo"));
 				v.setNumeroChamado(rs.getInt("numero_chamado"));
 				v.setIdEmpresa(rs.getInt("id_empresa"));
 				v.setTecnico(rs.getString("tecnico"));
@@ -167,6 +171,7 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 				vs = new VisitaTecnica();
 				vs.setIdVisitaTecnica(rs.getInt("id_visita_tecnica"));
 				vs.setNumeroChamado(rs.getInt("numero_chamado"));
+				vs.setTipo("tipo");
 				vs.setDataInicio(
 						LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				vs.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));

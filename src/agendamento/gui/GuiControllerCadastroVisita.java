@@ -37,6 +37,10 @@ public class GuiControllerCadastroVisita {
 	@FXML
 	private CheckBox isCobrada;
 	@FXML
+	private CheckBox isVisita;
+	@FXML
+	private CheckBox isImplantacao;
+	@FXML
 	private Button save;
 	@FXML
 	private Button cancel;
@@ -53,7 +57,22 @@ public class GuiControllerCadastroVisita {
 		String envio = "/agendamento/gui/fxml/GuiHome.fxml";
 		(new CriarView()).criarTela(stage, envio);
 	}
+	@FXML
+	public void selectionTipo() {
+		if (isVisita.isSelected() == true && isImplantacao.isSelected() == false) {
+			isImplantacao.setVisible(false);
+		} else if(isImplantacao.isSelected() == true && isVisita.isSelected() == false) {
+			isVisita.setVisible(false);
+		}
+		
+		if( isVisita.isSelected() == false) {
+			isImplantacao.setVisible(true);
+		}
+		if(isImplantacao.isSelected() == false) {
+			isVisita.setVisible(true);
+		}
 
+	}
 	@FXML
 	public void salvarButton(ActionEvent event) {
 		try {
@@ -66,6 +85,11 @@ public class GuiControllerCadastroVisita {
 			v.setIdEmpresa(Integer.parseInt(tarefaPai.getText()));
 			v.setSituacao(situacao.getText());
 			v.setLad(isCobrada.isSelected());
+			if(isVisita.isSelected() == true) {
+				v.setTipo("visita tecnica");
+			} if(isImplantacao.isSelected() == true) {
+				v.setTipo("implantação");
+			}
 			if (new VisitaTecnicaDao().salvar(v) == true) {
 				numeroChamado.clear();
 				tecnico.clear();
@@ -74,10 +98,14 @@ public class GuiControllerCadastroVisita {
 				tarefaPai.clear();
 				situacao.clear();
 				isCobrada.setSelected(false);
+				isVisita.setSelected(false);
+				isImplantacao.setSelected(false);
 			}
 		} catch (RuntimeException e) {
 			System.out.println("entrei no cath");
 			isCobrada.setSelected(false);
+			isVisita.setSelected(false);
+			isImplantacao.setSelected(false);
 			labels.setVisible(false);
 			textFilds.setVisible(false);
 			notice.setVisible(true);
