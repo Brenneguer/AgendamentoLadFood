@@ -28,7 +28,6 @@ public class GuiLogin {
 	@FXML
 	private Button login, newUser;
 	
-	
 	@FXML
 	public void selectLogin(ActionEvent action) {
 
@@ -44,8 +43,7 @@ public class GuiLogin {
 			alert.show();
 		}
 	}
-
-
+	
 	@FXML
 	public void selectNewUser(ActionEvent action) {
 		new GuiHome().chamarTelaCadastrarFuncionario(action);

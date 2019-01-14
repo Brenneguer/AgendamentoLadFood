@@ -30,7 +30,6 @@ public class GuiHome {
 	private Button sair;
 	String envia;
 
-
 	public void chamarTelaHome(ActionEvent e) {
 		node = (Node) e.getSource();
 		stage = (Stage) node.getScene().getWindow();

@@ -113,8 +113,6 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	private Button cancel;
 	@FXML
-	private Button export;
-	@FXML
 	private Button noticeBack;
 	@FXML
 	private Pane notice;
@@ -135,16 +133,15 @@ public class GuiControllerConsultaVisita {
 			if (adicionarArrayList(v) == true) {
 				tabela.setVisible(true);
 				editar.setVisible(true);
-				export.setVisible(true);
 			} else
 				throw new RuntimeException();
 		} catch (RuntimeException e) {
 			Alert alert = new Alert(AlertType.INFORMATION, "Por favor, insira informações para consulta.");
 			alert.setTitle("Lista vazia");
 			alert.setHeaderText("Não consiguimos localizar sua consulta.");
+			alert.show();
 			tabela.setVisible(false);
 			editar.setVisible(false);
-			export.setVisible(false);
 			e.getMessage();
 		}
 	}

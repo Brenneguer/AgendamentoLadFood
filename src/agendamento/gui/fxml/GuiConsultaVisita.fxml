@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="agendamento.gui.GuiControllerConsultaVisita">
+<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiControllerConsultaVisita">
    <AnchorPane cache="true" cacheHint="SCALE" depthTest="ENABLE" maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
       <children>
          <HBox fx:id="telaConsultaVisita" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
@@ -111,11 +111,6 @@
                      <Button fx:id="editar" contentDisplay="CENTER" focusTraversable="false" layoutX="780.0" layoutY="368.0" mnemonicParsing="false" onAction="#selectEditar" prefHeight="33.0" prefWidth="125.0" text="Editar" visible="false">
                         <font>
                            <Font name="Comic Sans MS" size="16.0" />
-                        </font>
-                     </Button>
-                     <Button fx:id="export" contentDisplay="CENTER" focusTraversable="false" layoutX="199.0" layoutY="623.0" mnemonicParsing="false" onAction="#exportar" prefHeight="2.0" prefWidth="56.0" text="csv" visible="false">
-                        <font>
-                           <Font name="Comic Sans MS" size="12.0" />
                         </font>
                      </Button>
             			

@@ -23,7 +23,7 @@ public class CriarView {
 			stage.setWidth(bound.getWidth());
 			stage.setHeight(bound.getHeight());
 			stage.setScene(scene);
-			stage.setTitle("LAD CAD");
+			stage.setTitle("Lad App");
 			stage.setMaximized(true);
 			stage.show();
 		} catch (IOException e) {

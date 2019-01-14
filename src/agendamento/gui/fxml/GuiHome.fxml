@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com" fx:controller="agendamento.gui.GuiHome">
+<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="agendamento.gui.GuiHome">
 <AnchorPane cache="true" cacheHint="SCALE" depthTest="ENABLE" maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
 			<children>
          <HBox alignment="CENTER" cache="true" cacheHint="SCALE" layoutX="256.0" layoutY="138.0" prefHeight="433.0" prefWidth="760.0" spacing="50.0">
