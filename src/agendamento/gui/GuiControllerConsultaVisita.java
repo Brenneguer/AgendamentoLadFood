@@ -303,7 +303,6 @@ public class GuiControllerConsultaVisita {
 			if (!lista.isEmpty()) {
 				for (VisitaTecnica v : lista) {
 					observableVisita.add(v);
-
 					colunaTecnico.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tecnico"));
 					colunaNumeroChamado
 							.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("numeroChamado"));
