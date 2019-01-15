@@ -6,6 +6,7 @@ import java.util.List;
 
 import agendamento.VisitaTecnica;
 import agendamento.dao.ConsultaDao;
+import agendamento.dao.Exportar;
 import agendamento.dao.VisitaTecnicaDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -88,6 +89,8 @@ public class GuiControllerConsultaVisita {
 	private Button inicio;
 	@FXML
 	private Button editar;
+	@FXML
+	private Button exportar;
 
 	/**
 	 * parte editar visita
@@ -187,6 +190,20 @@ public class GuiControllerConsultaVisita {
 
 	}
 
+	@FXML
+	public void selectExportar() {
+		if (listaVisita == null) {
+			Alert alert = new Alert(AlertType.INFORMATION, "A tabela não pode estar vazia");
+			alert.setTitle("Lista Vazia.");
+			alert.setHeaderText("Algo inesperado ocorreu, tente novamente.");
+			alert.show();
+		}
+		else {
+			Exportar ex = new Exportar();
+			ex.exportarExcel("C:/Agendamentos/lad food/export.xls", listaVisita);
+		}
+		
+	}
 	@FXML
 	public void selectNoticeBack(ActionEvent e) {
 		notice.setVisible(false);
