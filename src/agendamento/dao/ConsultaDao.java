@@ -150,7 +150,18 @@ public class ConsultaDao {
 		return listaVisitaTecnico;
 	}
 
-//	public List<VisitaTecnica> consultaTipo(){
-//		
-//	}
+	public List<VisitaTecnica> consultaTipo(List<VisitaTecnica> lista, String tipo) {
+		
+		if(lista.isEmpty()) {
+			System.out.println("lista não pode estar vazia");
+			return null;
+		}
+		listaVisita = new ArrayList<>();
+		for(VisitaTecnica v : lista) {
+			if (v.getTipo().equalsIgnoreCase(tipo)) {
+				listaVisita.add(v);
+			}
+		}
+		return listaVisita;
+	}
 }

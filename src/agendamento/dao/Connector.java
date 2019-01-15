@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Connector {
-	private static final String url = "jdbc:mysql://WEULLER-LAD/projetolad?useSSL=false";
-	private static final String user = "weuller";
-	private static final String password = "Ts40id60";
+	private static final String url = "jdbc:mysql://localhost/projetolad?useSSL=false";
+	private static final String user = "root";
+	private static final String password = "123456";
 
 	public static Connection abrirConexao() {
 		try {

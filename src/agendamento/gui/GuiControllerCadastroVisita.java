@@ -86,9 +86,9 @@ public class GuiControllerCadastroVisita {
 			v.setSituacao(situacao.getText());
 			v.setLad(isCobrada.isSelected());
 			if(isVisita.isSelected() == true) {
-				v.setTipo("visita tecnica");
+				v.setTipo("Visita Técnica");
 			} if(isImplantacao.isSelected() == true) {
-				v.setTipo("implantação");
+				v.setTipo("Implantação");
 			}
 			if (new VisitaTecnicaDao().salvar(v) == true) {
 				numeroChamado.clear();

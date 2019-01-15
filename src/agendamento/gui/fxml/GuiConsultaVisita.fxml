@@ -137,12 +137,12 @@
                                  <Font name="Comic Sans MS" size="14.0" />
                               </font>
                            </Label>
-                           <CheckBox fx:id="isImplantacao" mnemonicParsing="false" text="Implantação">
+                           <CheckBox fx:id="isImplantacao" mnemonicParsing="false" onAction="#selectionTipo" text="Implantação">
                               <font>
                                  <Font name="Comic Sans MS" size="13.0" />
                               </font>
                            </CheckBox>
-                           <CheckBox fx:id="isVisita" mnemonicParsing="false" text="Visita">
+                           <CheckBox fx:id="isVisita" mnemonicParsing="false" onAction="#selectionTipo" text="Visita">
                               <font>
                                  <Font name="Comic Sans MS" size="13.0" />
                               </font>

@@ -54,7 +54,7 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	private TableColumn<VisitaTecnica, String> colunaTecnico;
 	@FXML
-	private TableColumn<VisitaTecnica, String> colunaTipo;	
+	private TableColumn<VisitaTecnica, String> colunaTipo;
 	@FXML
 	private TableColumn<VisitaTecnica, Integer> colunaNumeroChamado;
 	@FXML
@@ -127,18 +127,18 @@ public class GuiControllerConsultaVisita {
 	public void selectionTipo() {
 		if (isVisita.isSelected() == true && isImplantacao.isSelected() == false) {
 			isImplantacao.setVisible(false);
-		} else if(isImplantacao.isSelected() == true && isVisita.isSelected() == false) {
+		} else if (isImplantacao.isSelected() == true && isVisita.isSelected() == false) {
 			isVisita.setVisible(false);
 		}
-		
-		if( isVisita.isSelected() == false) {
+
+		if (isVisita.isSelected() == false) {
 			isImplantacao.setVisible(true);
 		}
-		if(isImplantacao.isSelected() == false) {
+		if (isImplantacao.isSelected() == false) {
 			isVisita.setVisible(true);
 		}
-
 	}
+
 	@FXML
 	public void selectInicio(ActionEvent action) {
 		Node n = (Node) action.getSource();
@@ -152,6 +152,9 @@ public class GuiControllerConsultaVisita {
 		try {
 			List<VisitaTecnica> v = pesquisar(dataInicio, dataFim, numeroChamado, tecnico, isImplantacao, isVisita);
 			agruparPor(action);
+			if (v == null) {
+				throw new RuntimeException();
+			}
 			if (adicionarArrayList(v) == true) {
 				tabela.setVisible(true);
 				editar.setVisible(true);
@@ -165,7 +168,6 @@ public class GuiControllerConsultaVisita {
 			tabela.setVisible(false);
 			editar.setVisible(false);
 			e.getMessage();
-			e.printStackTrace();
 		}
 	}
 
@@ -179,11 +181,10 @@ public class GuiControllerConsultaVisita {
 		if (setarValoresTextView() == true) {
 			telaEditarVisita.setVisible(true);
 			telaConsultaVisita.setVisible(false);
-		}
-		else {
+		} else {
 			telaConsultaVisita.setVisible(true);
 		}
-			
+
 	}
 
 	@FXML
@@ -220,48 +221,70 @@ public class GuiControllerConsultaVisita {
 
 		if (numeroChamado.getText().equals("") && dataInicio.getText().equals("") && dataFim.getText().equals("")
 				&& Tecnico.getText().equals("")) {
-			Alert alert = new Alert(AlertType.INFORMATION,
-					"Você precisa inserir informações para consulta, insira um intervalo de datas.");
-			alert.setTitle("Consulta invalida");
-			alert.setHeaderText("Ops.");
-			alert.show();
+			listaVisita = null;
+			return listaVisita;
 
 		} else if (!numeroChamado.getText().equals("") && !dataInicio.getText().equals("")
 				&& !dataFim.getText().equals("")) {
-			//consulta data fim, data inicio, numero chamado;
+			// consulta data fim, data inicio, numero chamado;
 			List<VisitaTecnica> temp = cd.consultaPorData(
 					LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
 					LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
 			listaVisita = cd.consultaPorChamado(temp, Integer.parseInt(numeroChamado.getText()));
-			return listaVisita;
-
-		} else if (!numeroChamado.getText().equals("")) {
-			//consulta numero chamado
-			listaVisita = cd.consultaPorChamado(Integer.parseInt(numeroChamado.getText()));
-			
-			return listaVisita;
-
-		} else if (!dataFim.getText().equals("") && !dataInicio.getText().equals("")) {
-			//consulta data fim e data inicio
-			listaVisita = cd.consultaPorData(
-					LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-					LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-			return listaVisita;
+			if (isImplantacao.isSelected() == true) 
+				return listaVisita = cd.consultaTipo(listaVisita, "Implantação");
+			else if (isVisita.isSelected() == true) 
+				return listaVisita = cd.consultaTipo(listaVisita, "Visita Técnica");
+			else
+				return listaVisita;
 
 		} else if (!tecnico.getText().equals("") && !dataInicio.getText().equals("") && !dataFim.getText().equals("")) {
-			//consulta data inicio, data fim e tecnico
+			// consulta data inicio, data fim e tecnico
 			listaVisita = cd.consultaTecnico(
 					cd.consultaPorData(LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
 							LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))),
 					tecnico.getText());
-
-			return listaVisita;
+			if (isImplantacao.isSelected() == true) {
+				listaVisita = cd.consultaTipo(listaVisita, "Implantação");
+				return listaVisita;
+			} else if (isVisita.isSelected() == true) {
+				listaVisita = cd.consultaTipo(listaVisita, "Visita Técnica");
+				return listaVisita;
+			} else
+				return listaVisita;
 
 		} else if (!tecnico.getText().equals("") && dataInicio.getText().equals("") && dataFim.getText().equals("")) {
-			//consulta Tecnico
-			listaVisita = cd.consultaTecnico(tecnico.getText());
+			// consulta Tecnico;
+			if (isImplantacao.isSelected() == true) {
+				listaVisita = cd.consultaTipo(cd.consultaTecnico(tecnico.getText()), "Implantação");
+				return listaVisita;
+			} else if (isVisita.isSelected() == true) {
+				listaVisita = cd.consultaTipo(cd.consultaTecnico(tecnico.getText()), "Visita Técnica");
+				return listaVisita;
+			} else
+				listaVisita = cd.consultaTecnico(tecnico.getText());
 			return listaVisita;
+		} else if (!dataFim.getText().equals("") && !dataInicio.getText().equals("")) {
+			// consulta data fim e data inicio
+			listaVisita = cd.consultaPorData(
+					LocalDate.parse(dataInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+					LocalDate.parse(dataFim.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			if (isImplantacao.isSelected() == true)
+				return listaVisita = cd.consultaTipo(listaVisita, "Implantação");
+		
+			else if (isVisita.isSelected() == true) 
+				return listaVisita = cd.consultaTipo(listaVisita, "Visita Técnica");
+		
+			else 
+				return listaVisita;
+
+		} else if (!numeroChamado.getText().equals("")) {
+			// consulta numero chamado
+			if (isImplantacao.isSelected() == true);
+			listaVisita = cd.consultaPorChamado(Integer.parseInt(numeroChamado.getText()));
+
+			return listaVisita;
+
 		}
 		return listaVisita;
 	}
@@ -356,7 +379,7 @@ public class GuiControllerConsultaVisita {
 			situacaoEditar.setText(tabela.getSelectionModel().getSelectedItem().getSituacao());
 			isCobradaEditar.setSelected(tabela.getSelectionModel().getSelectedItem().getLad());
 			idVisita = tabela.getSelectionModel().getSelectedItem().getIdVisitaTecnica();
-			
+
 			bool = true;
 		} catch (NullPointerException e) {
 			Alert alert = new Alert(AlertType.INFORMATION, "Para editar, você precisa selecionar uma linha da tabela.");
