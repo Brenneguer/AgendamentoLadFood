@@ -26,7 +26,7 @@ public class Executor extends Application {
 			stage.setWidth(bound.getWidth());
 			stage.setHeight(bound.getHeight());
 			stage.setScene(scene);
-			stage.setTitle("LAD CAD");
+			stage.setTitle("AgendaLad");
 			stage.setMaximized(true);
 			stage.show();
 			stage.setMaximized(true);
