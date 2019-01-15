@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Connector {
-	private static final String url = "jdbc:mysql://localhost/projetolad?useSSL=false";
+	private static final String url = "jdbc:mysql://WEULLER-LAD/agendamento_desktop?useSSL=false";
 	private static final String user = "weuller";
 	private static final String password = "Ts40id60";
 

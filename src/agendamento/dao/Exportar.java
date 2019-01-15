@@ -54,7 +54,6 @@ public class Exportar {
 				row.createCell(6).setCellValue(v.getSituacao());
 				row.createCell(7).setCellValue(v.getLad());
 				i++;
-				System.out.println(i);
 			}
 		}
 		try (FileOutputStream file = new FileOutputStream(new File(ondeSalvar))) {
