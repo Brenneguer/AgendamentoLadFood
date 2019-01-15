@@ -89,7 +89,11 @@ public class GuiControllerCadastroUsuario {
 	public void cancelarButton(ActionEvent e) {
 		labels.setVisible(false);
 		textFilds.setVisible(false);
+		if (GuiLogin.logado == false) {
 		GuiHome.chamarTelaLogin(e);
+		} else {
+			new GuiHome().chamarTelaHome(e);
+		}
 	}
 
 }

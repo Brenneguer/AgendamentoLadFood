@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -11,132 +12,136 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="agendamento.gui.GuiControllerCadastroVisita">
-		<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
-			<children>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#22548000" height="511.0" layoutX="347.0" layoutY="113.0" smooth="false" stroke="#0000001c" strokeLineCap="ROUND" strokeType="INSIDE" width="664.0" />
-      <VBox fx:id="textFilds" layoutX="617.0" layoutY="170.0" prefHeight="321.0" prefWidth="256.0" spacing="16.0">
-         <children>
-               <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                  <children>
-                     <CheckBox fx:id="isImplantacao" mnemonicParsing="false" onAction="#selectionTipo" prefHeight="21.0" prefWidth="131.0" text="Implantação">
+<HBox alignment="CENTER" blendMode="MULTIPLY" cache="true" cacheHint="SCALE" depthTest="ENABLE" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agendamento.gui.GuiControllerCadastroVisita">
+   <ScrollPane>
+      <content>
+      		<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
+      			<children>
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#22548000" height="511.0" layoutX="347.0" layoutY="113.0" smooth="false" stroke="#0000001c" strokeLineCap="ROUND" strokeType="INSIDE" width="664.0" />
+            <VBox fx:id="textFilds" layoutX="617.0" layoutY="170.0" prefHeight="321.0" prefWidth="256.0" spacing="16.0">
+               <children>
+                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                        <children>
+                           <CheckBox fx:id="isImplantacao" mnemonicParsing="false" onAction="#selectionTipo" prefHeight="21.0" prefWidth="131.0" text="Implantação">
+                              <font>
+                                 <Font name="Comic Sans MS" size="14.0" />
+                              </font>
+                           </CheckBox>
+                           <CheckBox fx:id="isVisita" mnemonicParsing="false" onAction="#selectionTipo" text="Visita">
+                              <font>
+                                 <Font name="Comic Sans MS" size="14.0" />
+                              </font>
+                           </CheckBox>
+                        </children>
+                     </HBox>
+      				<TextField fx:id="numeroChamado" alignment="CENTER" promptText="NNNN" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="tecnico" alignment="CENTER" promptText="Nome Tecnico" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="dataInicio" alignment="CENTER" promptText="dd/MM/aaaa" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="dataFim" alignment="TOP_CENTER" promptText="dd/MM/aaaa" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="tarefaPai" alignment="TOP_CENTER" promptText="Tarefa Pai" scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+      				<TextField fx:id="situacao" alignment="TOP_CENTER" prefHeight="34.0" prefWidth="162.0" promptText="confirmada, finalziada..." scaleShape="false">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</TextField>
+               </children>
+            </VBox>
+            <VBox fx:id="labels" layoutX="465.0" layoutY="167.0" prefHeight="326.0" prefWidth="150.0" spacing="27.0">
+               <children>
+                     <Label layoutX="10.0" layoutY="10.0" scaleShape="false" text="Tipo" textAlignment="CENTER" wrapText="true">
                         <font>
-                           <Font name="Comic Sans MS" size="14.0" />
+                           <Font name="Comic Sans MS" size="18.0" />
                         </font>
-                     </CheckBox>
-                     <CheckBox fx:id="isVisita" mnemonicParsing="false" onAction="#selectionTipo" text="Visita">
-                        <font>
-                           <Font name="Comic Sans MS" size="14.0" />
-                        </font>
-                     </CheckBox>
-                  </children>
-               </HBox>
-				<TextField fx:id="numeroChamado" alignment="CENTER" promptText="NNNN" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="tecnico" alignment="CENTER" promptText="Nome Tecnico" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="dataInicio" alignment="CENTER" promptText="dd/MM/aaaa" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="dataFim" alignment="TOP_CENTER" promptText="dd/MM/aaaa" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="tarefaPai" alignment="TOP_CENTER" promptText="Tarefa Pai" scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</TextField>
-				<TextField fx:id="situacao" alignment="TOP_CENTER" prefHeight="34.0" prefWidth="162.0" promptText="confirmada, finalziada..." scaleShape="false">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</TextField>
-         </children>
-      </VBox>
-      <VBox fx:id="labels" layoutX="465.0" layoutY="167.0" prefHeight="326.0" prefWidth="150.0" spacing="27.0">
-         <children>
-               <Label layoutX="10.0" layoutY="10.0" scaleShape="false" text="Tipo" textAlignment="CENTER" wrapText="true">
-                  <font>
-                     <Font name="Comic Sans MS" size="18.0" />
-                  </font>
-               </Label>
-				<Label scaleShape="false" text="Numero Chamado" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label scaleShape="false" text="Tecnico" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label scaleShape="false" text="Data Inicio" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label scaleShape="false" text="Data Prevista" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label scaleShape="false" text="Tarefa Pai" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-				<Label scaleShape="false" text="Situação" textAlignment="CENTER" wrapText="true">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Label>
-         </children>
-      </VBox>
-				<CheckBox fx:id="isCobrada" layoutX="760.0" layoutY="528.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="237.0" text="Cobrada">
-					<font>
-						<Font name="Comic Sans MS" size="19.0" />
-					</font>
-				</CheckBox>
-				<Button fx:id="cancel" depthTest="ENABLE" layoutX="463.0" layoutY="573.0" mnemonicParsing="false" onAction="#cancelarButton" prefHeight="32.0" prefWidth="96.0" text="Cancelar">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Button>
-				<Button fx:id="save" depthTest="ENABLE" layoutX="901.0" layoutY="573.0" mnemonicParsing="false" onAction="#salvarButton" prefHeight="32.0" prefWidth="96.0" text="Salvar">
-					<font>
-						<Font name="Comic Sans MS" size="18.0" />
-					</font>
-				</Button>
-      <Button fx:id="inicio" blendMode="DARKEN" depthTest="ENABLE" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectInicio" prefHeight="31.0" prefWidth="175.0" text="Inicio">
-         <font>
-            <Font name="Comic Sans MS" size="18.0" />
-         </font>
-      </Button>
-      <Pane fx:id="notice" layoutX="436.0" layoutY="305.0" prefHeight="79.0" prefWidth="406.0" visible="false">
-         <children>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="405.0" text="Algo de inesperado ocorreu, tente novamente.">
+                     </Label>
+      				<Label scaleShape="false" text="Numero Chamado" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Tecnico" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Data Inicio" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Data Prevista" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Tarefa Pai" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label scaleShape="false" text="Situação" textAlignment="CENTER" wrapText="true">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Label>
+               </children>
+            </VBox>
+      				<CheckBox fx:id="isCobrada" layoutX="760.0" layoutY="528.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="237.0" text="Cobrada">
+      					<font>
+      						<Font name="Comic Sans MS" size="19.0" />
+      					</font>
+      				</CheckBox>
+      				<Button fx:id="cancel" depthTest="ENABLE" layoutX="463.0" layoutY="573.0" mnemonicParsing="false" onAction="#cancelarButton" prefHeight="32.0" prefWidth="96.0" text="Cancelar">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Button>
+      				<Button fx:id="save" depthTest="ENABLE" layoutX="901.0" layoutY="573.0" mnemonicParsing="false" onAction="#salvarButton" prefHeight="32.0" prefWidth="96.0" text="Salvar">
+      					<font>
+      						<Font name="Comic Sans MS" size="18.0" />
+      					</font>
+      				</Button>
+            <Button fx:id="inicio" blendMode="DARKEN" depthTest="ENABLE" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectInicio" prefHeight="31.0" prefWidth="175.0" text="Inicio">
                <font>
                   <Font name="Comic Sans MS" size="18.0" />
                </font>
-            </Label>
-            <Button fx:id="noticeBack" layoutX="177.0" layoutY="40.0" mnemonicParsing="false" onAction="#selectNoticeBack" text="Voltar">
-               <font>
-                  <Font name="Comic Sans MS" size="13.0" />
-               </font>
             </Button>
-         </children>
-      </Pane>
-			</children>
-		</AnchorPane>
+            <Pane fx:id="notice" layoutX="436.0" layoutY="305.0" prefHeight="79.0" prefWidth="406.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="405.0" text="Algo de inesperado ocorreu, tente novamente.">
+                     <font>
+                        <Font name="Comic Sans MS" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="noticeBack" layoutX="177.0" layoutY="40.0" mnemonicParsing="false" onAction="#selectNoticeBack" text="Voltar">
+                     <font>
+                        <Font name="Comic Sans MS" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+      			</children>
+      		</AnchorPane>
+      </content>
+   </ScrollPane>
 
 </HBox>
