@@ -59,7 +59,7 @@ public class Exportar {
 		try (FileOutputStream file = new FileOutputStream(new File(ondeSalvar))) {
 			workbook.write(file);
 
-			Alert alert = new Alert(AlertType.INFORMATION, "Salvo em C:\\Agendamento\\lista visita.xls");
+			Alert alert = new Alert(AlertType.INFORMATION, "Salvo em C:\\Agendamento\\lad food\\lista visita.xls");
 			alert.setTitle("Exportar");
 			alert.setHeaderText("Exportação Concluida.");
 			alert.show();

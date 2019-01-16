@@ -117,19 +117,19 @@
                               </font>
                            </Button>
                   			
-                                                	<TableView fx:id="tabela" cache="true" layoutX="200.0" layoutY="434.0" maxWidth="893.0" minWidth="780.0" opacity="0.91" pickOnBounds="false" prefHeight="180.0" prefWidth="880.0" visible="false">
+                                                	<TableView fx:id="tabela" cache="true" layoutX="200.0" layoutY="434.0" maxWidth="880.0" minWidth="780.0" opacity="0.91" pickOnBounds="false" prefHeight="180.0" prefWidth="880.0" visible="false">
                   					<columnResizePolicy>
                   						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                   					</columnResizePolicy>
                   					<columns>
-                  						<TableColumn fx:id="colunaNumeroChamado" editable="false" maxWidth="3500.0" prefWidth="127.0" resizable="true" text="Numero Chamado" />
-                                 			<TableColumn fx:id="colunaTipo" editable="false" maxWidth="3000.0" prefWidth="101.0" text="Tipo" visible="false" />
-                              			<TableColumn fx:id="colunaEmpresa" editable="false" maxWidth="3000.0" prefWidth="101.0" text="Empresa" visible="false" />
-                  						<TableColumn fx:id="colunaTecnico" editable="false" maxWidth="3000.0" prefWidth="124.0" resizable="true" text="Tecnico" visible="false" />
-                  						<TableColumn fx:id="colunaDataInicio" editable="false" maxWidth="3000.0" prefWidth="75.0" resizable="true" text="Data Inicio" visible="false" />
-                  						<TableColumn fx:id="colunaDataFim" editable="false" maxWidth="3000.0" prefWidth="75.0" resizable="true" text="Data Fim" visible="false" />
-                  						<TableColumn fx:id="colunaSituacao" editable="false" maxWidth="3000.0" prefWidth="196.0" resizable="true" text="Situação" visible="false" />
-                              			<TableColumn fx:id="colunaCobrada" editable="false" maxWidth="2000.0" prefWidth="100.0" text="Cobrada" visible="false" />
+                                 		<TableColumn fx:id="colunaTipo" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" resizable="false" text="Tipo" visible="false" />
+                  						<TableColumn fx:id="colunaNumeroChamado" maxWidth="880.0" minWidth="90.0" prefWidth="110.0" resizable="true" text="Numero Chamado" />
+                  						<TableColumn fx:id="colunaTecnico" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" text="Tecnico" visible="false" />
+                              			<TableColumn fx:id="colunaEmpresa" maxWidth="880.0" minWidth="90.0" prefWidth="110.0" text="Empresa" visible="false" />
+                  						<TableColumn fx:id="colunaDataInicio" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" resizable="false" text="Data Inicio" visible="false" />
+                  						<TableColumn fx:id="colunaDataFim" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" resizable="false" text="Data Fim" visible="false" />
+                  						<TableColumn fx:id="colunaSituacao" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" resizable="false" text="Situação" visible="false" />
+                              			<TableColumn fx:id="colunaCobrada" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" resizable="false" text="Cobrada" visible="false" />
                   					</columns>
                   
                                     				</TableView>
