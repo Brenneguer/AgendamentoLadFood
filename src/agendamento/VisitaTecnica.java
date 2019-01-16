@@ -10,14 +10,14 @@ public class VisitaTecnica {
 	private LocalDate dataFim;
 	private String tecnico;
 	private String tipo;
-	private Integer idEmpresa;
+	private String empresa;
 
-	public Integer getIdEmpresa() {
-		return idEmpresa;
+	public String getEmpresa() {
+		return empresa;
 	}
 
-	public void setIdEmpresa(Integer idEmpresa) {
-		this.idEmpresa = idEmpresa;
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 
 	private Boolean lad;
@@ -97,7 +97,7 @@ public class VisitaTecnica {
 	}
 
 	public String toString() {
-		return ""+tecnico+";"+tipo+";"+numeroChamado+";"+idEmpresa+";"+dataInicio.toString()+";"+dataFim.toString()+";"+situacao+";"+lad;
+		return ""+tecnico+";"+tipo+";"+numeroChamado+";"+empresa+";"+dataInicio.toString()+";"+dataFim.toString()+";"+situacao+";"+lad;
 	}
 
 }

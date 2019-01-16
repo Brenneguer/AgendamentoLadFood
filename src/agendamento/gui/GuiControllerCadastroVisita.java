@@ -82,7 +82,7 @@ public class GuiControllerCadastroVisita {
 			v.setTecnico(tecnico.getText());
 			v.setDataInicio(dataInicio.getText());
 			v.setDataFim(dataFim.getText());
-			v.setIdEmpresa(Integer.parseInt(tarefaPai.getText()));
+			v.setEmpresa(tarefaPai.getText());
 			v.setSituacao(situacao.getText());
 			v.setLad(isCobrada.isSelected());
 			if(isVisita.isSelected() == true) {
@@ -100,6 +100,8 @@ public class GuiControllerCadastroVisita {
 				isCobrada.setSelected(false);
 				isVisita.setSelected(false);
 				isImplantacao.setSelected(false);
+				isImplantacao.setVisible(true);
+				isVisita.setVisible(true);
 			}
 		} catch (RuntimeException e) {
 			System.out.println("entrei no cath");

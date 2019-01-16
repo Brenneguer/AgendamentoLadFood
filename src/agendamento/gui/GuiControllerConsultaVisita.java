@@ -59,7 +59,7 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	private TableColumn<VisitaTecnica, Integer> colunaNumeroChamado;
 	@FXML
-	private TableColumn<VisitaTecnica, Integer> colunaEmpresa;
+	private TableColumn<VisitaTecnica, String> colunaEmpresa;
 	@FXML
 	private TableColumn<VisitaTecnica, LocalDate> colunaDataInicio;
 	@FXML
@@ -324,7 +324,7 @@ public class GuiControllerConsultaVisita {
 					colunaNumeroChamado
 							.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("numeroChamado"));
 					colunaTipo.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("tipo"));
-					colunaEmpresa.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Integer>("idEmpresa"));
+					colunaEmpresa.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("empresa"));
 					colunaCobrada.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Boolean>("lad"));
 					colunaDataInicio
 							.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataInicio"));
@@ -391,7 +391,7 @@ public class GuiControllerConsultaVisita {
 			tecnicoEditar.setText(tabela.getSelectionModel().getSelectedItem().getTecnico());
 			dataInicioEditar.setText(tabela.getSelectionModel().getSelectedItem().getDataInicio().format(format));
 			dataFimEditar.setText(tabela.getSelectionModel().getSelectedItem().getDataFim().format(format));
-			tarefaPaiEditar.setText("" + tabela.getSelectionModel().getSelectedItem().getIdEmpresa());
+			tarefaPaiEditar.setText(tabela.getSelectionModel().getSelectedItem().getEmpresa());
 			situacaoEditar.setText(tabela.getSelectionModel().getSelectedItem().getSituacao());
 			isCobradaEditar.setSelected(tabela.getSelectionModel().getSelectedItem().getLad());
 			idVisita = tabela.getSelectionModel().getSelectedItem().getIdVisitaTecnica();
@@ -421,7 +421,7 @@ public class GuiControllerConsultaVisita {
 			v.setTecnico(tecnicoEditar.getText());
 			v.setDataInicio(dataInicioEditar.getText());
 			v.setDataFim(dataFimEditar.getText());
-			v.setIdEmpresa(Integer.parseInt(tarefaPaiEditar.getText()));
+			v.setEmpresa(tarefaPaiEditar.getText());
 			v.setSituacao(situacaoEditar.getText());
 			v.setLad(isCobradaEditar.isSelected());
 			if (new VisitaTecnicaDao().update(v)) {

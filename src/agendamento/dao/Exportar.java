@@ -48,7 +48,7 @@ public class Exportar {
 				row.createCell(0).setCellValue(v.getTecnico());
 				row.createCell(1).setCellValue(v.getTipo());
 				row.createCell(2).setCellValue(v.getNumeroChamado());
-				row.createCell(3).setCellValue(v.getIdEmpresa());
+				row.createCell(3).setCellValue(v.getEmpresa());
 				row.createCell(4).setCellValue(v.getDataInicio().format(format));
 				row.createCell(5).setCellValue(v.getDataFim().format(format));
 				row.createCell(6).setCellValue(v.getSituacao());

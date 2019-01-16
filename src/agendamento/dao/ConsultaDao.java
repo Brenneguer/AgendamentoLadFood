@@ -38,7 +38,7 @@ public class ConsultaDao {
 				v.setDataInicio(
 						LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-				v.setIdEmpresa(rs.getInt("id_empresa"));
+				v.setEmpresa(rs.getString("empresa"));
 				v.setTecnico(rs.getString("tecnico"));
 				v.setLad(rs.getBoolean("is_lad"));
 				v.setSituacao(rs.getString("situacao"));
@@ -71,7 +71,7 @@ public class ConsultaDao {
 				v.setTipo(rs.getString("tipo"));
 				v.setDataInicio(LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-				v.setIdEmpresa(rs.getInt("id_empresa"));	
+				v.setEmpresa(rs.getString("empresa"));	
 				v.setTecnico(rs.getString("tecnico"));
 				v.setLad(rs.getBoolean("is_lad"));
 				v.setSituacao(rs.getString("situacao"));
@@ -137,7 +137,7 @@ public class ConsultaDao {
 				v.setTipo(rs.getString("tipo"));
 				v.setDataInicio(LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-				v.setIdEmpresa(rs.getInt("id_empresa"));
+				v.setEmpresa(rs.getString("empresa"));
 				v.setTecnico(rs.getString("tecnico"));
 				v.setLad(rs.getBoolean("is_lad"));
 				v.setSituacao(rs.getString("situacao"));

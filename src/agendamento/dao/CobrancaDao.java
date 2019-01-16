@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 import agendamento.ChaveEstrangeiraException;
 import agendamento.Cobranca;
-import agendamento.VisitaTecnica;
 
 // Referenced classes of package agendamento.dao:
 //            IDao, VisitaTecnicaDao, Connector
@@ -24,7 +23,7 @@ public class CobrancaDao implements IDao<Cobranca> {
 
 	public boolean salvar(Cobranca obj) throws ChaveEstrangeiraException {
 		Cobranca c = buscarPorNumeroChamado(obj.getNumeroChamado());
-		VisitaTecnica v = (new VisitaTecnicaDao()).buscarPorNumeroChamado(obj.getNumeroChamado());
+		Object v = (new VisitaTecnicaDao()).buscarPorNumeroChamado(obj.getNumeroChamado());
 		boolean bool = false;
 		if (v == null)
 			throw new ChaveEstrangeiraException();
