@@ -100,8 +100,9 @@ public class ConsultaDao {
 		List<VisitaTecnica> listaVisitaTecnico = new ArrayList<VisitaTecnica>();
 		if (!lista.isEmpty()) {
 			for (VisitaTecnica v : lista) {
-				if (v.getTecnico().equalsIgnoreCase(tecnico)) {
+				if (v.getTecnico().contains(tecnico)) {
 					listaVisitaTecnico.add(v);
+					
 				}
 			}
 		}

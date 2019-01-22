@@ -117,10 +117,7 @@
                               </font>
                            </Button>
                   			
-                                                	<TableView fx:id="tabela" cache="true" layoutX="200.0" layoutY="434.0" maxWidth="880.0" minWidth="780.0" opacity="0.91" pickOnBounds="false" prefHeight="180.0" prefWidth="880.0" visible="false">
-                  					<columnResizePolicy>
-                  						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                  					</columnResizePolicy>
+                                                	<TableView fx:id="tabela" cache="true" editable="true" layoutX="200.0" layoutY="434.0" maxWidth="880.0" minWidth="780.0" opacity="0.91" pickOnBounds="false" prefHeight="380.0" prefWidth="880.0">
                   					<columns>
                                  		<TableColumn fx:id="colunaTipo" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" resizable="false" text="Tipo" visible="false" />
                   						<TableColumn fx:id="colunaNumeroChamado" maxWidth="880.0" minWidth="90.0" prefWidth="110.0" resizable="true" text="Numero Chamado" />
@@ -131,6 +128,9 @@
                   						<TableColumn fx:id="colunaSituacao" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" resizable="false" text="Situação" visible="false" />
                               			<TableColumn fx:id="colunaCobrada" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" resizable="false" text="Cobrada" visible="false" />
                   					</columns>
+                              <columnResizePolicy>
+                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                              </columnResizePolicy>
                   
                                     				</TableView>
                            <HBox layoutX="272.0" layoutY="154.0" prefHeight="35.0" prefWidth="326.0" spacing="10.0">
@@ -157,7 +157,7 @@
                                  <Font name="Comic Sans MS" size="12.0" />
                               </font>
                            </CheckBox>
-                           <Button fx:id="exportar" layoutX="202.0" layoutY="627.0" mnemonicParsing="false" onAction="#selectExportar" prefHeight="26.0" prefWidth="49.0" text="xls">
+                           <Button fx:id="exportar" layoutX="200.0" layoutY="403.0" mnemonicParsing="false" onAction="#selectExportar" prefHeight="26.0" prefWidth="49.0" text="xls">
                               <font>
                                  <Font name="Comic Sans MS" size="12.0" />
                               </font>
