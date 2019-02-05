@@ -6,11 +6,13 @@ import java.time.format.DateTimeFormatter;
 public class VisitaTecnica {
 	private int idVisitaTecnica;
 	private int numeroChamado;
+	private double valor;
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
 	private String tecnico;
 	private String tipo;
 	private String empresa;
+	private String obs;
 
 	public String getEmpresa() {
 		return empresa;
@@ -94,6 +96,22 @@ public class VisitaTecnica {
 
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	public String getObs() {
+		return obs;
+	}
+
+	public void setObs(String obs) {
+		this.obs = obs;
 	}
 
 	public String toString() {

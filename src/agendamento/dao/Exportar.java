@@ -39,8 +39,10 @@ public class Exportar {
 				row.createCell(3).setCellValue("Tarefa Pai");
 				row.createCell(4).setCellValue("Data Inicio");
 				row.createCell(5).setCellValue("Data Fim");
-				row.createCell(6).setCellValue("Situação");
-				row.createCell(7).setCellValue("Cobrada");
+				row.createCell(6).setCellValue("Valor");
+				row.createCell(7).setCellValue("Situação");
+				row.createCell(8).setCellValue("Cobrada");
+				row.createCell(9).setCellValue("Observação / Cobrança");
 				i++;
 			}
 			if (i > 0) {
@@ -51,8 +53,10 @@ public class Exportar {
 				row.createCell(3).setCellValue(v.getEmpresa());
 				row.createCell(4).setCellValue(v.getDataInicio().format(format));
 				row.createCell(5).setCellValue(v.getDataFim().format(format));
-				row.createCell(6).setCellValue(v.getSituacao());
-				row.createCell(7).setCellValue(v.getLad());
+				row.createCell(6).setCellValue(v.getValor());
+				row.createCell(7).setCellValue(v.getSituacao());
+				row.createCell(8).setCellValue(v.getLad());
+				row.createCell(9).setCellValue(v.getObs());
 				i++;
 			}
 		}
