@@ -19,6 +19,8 @@ public class GuiControllerCadastroVisita {
 	@FXML
 	private VBox labels;
 	@FXML
+	private Label labelValor;
+	@FXML
 	private VBox textFilds;
 
 	@FXML
@@ -31,6 +33,10 @@ public class GuiControllerCadastroVisita {
 	private TextField dataFim;
 	@FXML
 	private TextField tarefaPai;
+	@FXML
+	private TextField obs;
+	@FXML
+	private TextField valor;
 	@FXML
 	private TextField situacao;
 
@@ -73,6 +79,17 @@ public class GuiControllerCadastroVisita {
 		}
 
 	}
+	
+	@FXML
+	public void selectCobrada() {
+		if(isCobrada.isSelected() == true && valor.isVisible() == false) {
+			valor.setVisible(true);
+			labelValor.setVisible(true);
+		} else if(isCobrada.isSelected() == false && valor.isVisible() == true) {
+			valor.setVisible(false);
+			labelValor.setVisible(false);
+		}
+	}
 	@FXML
 	public void salvarButton(ActionEvent event) {
 		try {
@@ -84,7 +101,9 @@ public class GuiControllerCadastroVisita {
 			v.setDataFim(dataFim.getText());
 			v.setEmpresa(tarefaPai.getText());
 			v.setSituacao(situacao.getText());
+			v.setObs(obs.getText());
 			v.setLad(isCobrada.isSelected());
+			v.setValor(Double.parseDouble(valor.getText()));
 			if(isVisita.isSelected() == true) {
 				v.setTipo("Visita Técnica");
 			} if(isImplantacao.isSelected() == true) {
@@ -97,6 +116,9 @@ public class GuiControllerCadastroVisita {
 				dataFim.clear();
 				tarefaPai.clear();
 				situacao.clear();
+				valor.clear();
+				valor.setVisible(false);
+				labelValor.setVisible(false);
 				isCobrada.setSelected(false);
 				isVisita.setSelected(false);
 				isImplantacao.setSelected(false);
@@ -105,6 +127,7 @@ public class GuiControllerCadastroVisita {
 			}
 		} catch (RuntimeException e) {
 			System.out.println("entrei no cath");
+			e.printStackTrace();
 			isCobrada.setSelected(false);
 			isVisita.setSelected(false);
 			isImplantacao.setSelected(false);
@@ -122,10 +145,21 @@ public class GuiControllerCadastroVisita {
 		
 	}
 
-	public void cancelarButton(ActionEvent e) {
-		labels.setVisible(false);
-		textFilds.setVisible(false);
+	public void cancelarButton(ActionEvent e) {;
+		isVisita.setSelected(false);
+		isImplantacao.setSelected(false);
 		isCobrada.setSelected(false);
+		labelValor.setVisible(false);
+		numeroChamado.clear();
+		tecnico.clear();
+		dataInicio.clear();
+		dataFim.clear();
+		tarefaPai.clear();
+		situacao.clear();
+		obs.clear();
+		valor.setVisible(false);
+		valor.clear();
+		
 	}
 
 

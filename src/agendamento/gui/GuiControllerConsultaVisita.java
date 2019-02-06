@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -69,6 +70,10 @@ public class GuiControllerConsultaVisita {
 	@FXML
 	private TableColumn<VisitaTecnica, Boolean> colunaCobrada;
 	@FXML
+	private TableColumn<VisitaTecnica, String> colunaObs;
+	@FXML
+	private TableColumn<VisitaTecnica, Double> colunaValor;
+	@FXML
 	private ObservableList<VisitaTecnica> observableVisita = FXCollections.observableArrayList();
 
 	@FXML
@@ -85,6 +90,11 @@ public class GuiControllerConsultaVisita {
 	private CheckBox agruparTipo;
 	@FXML
 	private CheckBox agruparCobrada;
+	@FXML
+	private CheckBox agruparValor;
+	@FXML
+	private CheckBox agruparObs;
+	
 	@FXML
 	private Button inicio;
 	@FXML
@@ -114,6 +124,12 @@ public class GuiControllerConsultaVisita {
 	private TextField tarefaPaiEditar;
 	@FXML
 	private TextField situacaoEditar;
+	@FXML
+	private TextField observacaoEditar;
+	@FXML
+	private TextField valorEditar;
+	@FXML
+	private Label labelValorEditar;
 
 	@FXML
 	private CheckBox isCobradaEditar;
@@ -141,6 +157,18 @@ public class GuiControllerConsultaVisita {
 			isVisita.setVisible(true);
 		}
 	}
+	
+	@FXML
+	public void selectionCobrada() {
+		if(isCobradaEditar.isSelected() == true) {
+			labelValorEditar.setVisible(true);
+			valorEditar.setVisible(true);
+		}
+		else {
+			labelValorEditar.setVisible(false);
+			valorEditar.setVisible(false);
+		}
+	}
 
 	@FXML
 	public void selectInicio(ActionEvent action) {
@@ -159,6 +187,7 @@ public class GuiControllerConsultaVisita {
 				throw new RuntimeException();
 			}
 			if (adicionarArrayList(v) == true) {
+				
 				tabela.setVisible(true);
 				editar.setVisible(true);
 			} else
@@ -200,7 +229,7 @@ public class GuiControllerConsultaVisita {
 		}
 		else {
 			Exportar ex = new Exportar();
-			ex.exportarExcel("C:/Agendamentos/lad food/export.xls", listaVisita);
+			ex.exportarExcel("C:/Agendamentos/lad food/lista visita.xlsx", listaVisita);
 		}
 		
 	}
@@ -230,7 +259,7 @@ public class GuiControllerConsultaVisita {
 	 * @param Tecnico
 	 * @return
 	 */
-	private List<VisitaTecnica> pesquisar(TextField dataInicio, TextField dataFim, TextField numeroChamado,
+	public List<VisitaTecnica> pesquisar(TextField dataInicio, TextField dataFim, TextField numeroChamado,
 			TextField Tecnico, CheckBox implantacao, CheckBox visita) {
 
 		ConsultaDao cd = new ConsultaDao();
@@ -330,6 +359,8 @@ public class GuiControllerConsultaVisita {
 							.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataInicio"));
 					colunaDataFim.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, LocalDate>("dataFim"));
 					colunaSituacao.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("situacao"));
+					colunaObs.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, String>("obs"));
+					colunaValor.setCellValueFactory(new PropertyValueFactory<VisitaTecnica, Double>("valor"));
 					tabela.setItems(observableVisita);
 
 				}
@@ -356,6 +387,7 @@ public class GuiControllerConsultaVisita {
 			colunaDataInicio.setVisible(false);
 			colunaDataFim.setVisible(false);
 			colunaSituacao.setVisible(false);
+			colunaObs.setVisible(false);
 		}
 
 		if (agruparDataInicio.isSelected()) {
@@ -379,6 +411,12 @@ public class GuiControllerConsultaVisita {
 		if (agruparSituacao.isSelected()) {
 			colunaSituacao.setVisible(true);
 		}
+		if (agruparObs.isSelected()) {
+			colunaObs.setVisible(true);
+		}
+		if (agruparValor.isSelected()) {
+			colunaValor.setVisible(true);
+		}
 	}
 
 	/**
@@ -395,6 +433,8 @@ public class GuiControllerConsultaVisita {
 			situacaoEditar.setText(tabela.getSelectionModel().getSelectedItem().getSituacao());
 			isCobradaEditar.setSelected(tabela.getSelectionModel().getSelectedItem().getLad());
 			idVisita = tabela.getSelectionModel().getSelectedItem().getIdVisitaTecnica();
+			observacaoEditar.setText(tabela.getSelectionModel().getSelectedItem().getObs());
+			valorEditar.setText("" + tabela.getSelectionModel().getSelectedItem().getValor());
 
 			bool = true;
 		} catch (NullPointerException e) {
@@ -424,6 +464,8 @@ public class GuiControllerConsultaVisita {
 			v.setEmpresa(tarefaPaiEditar.getText());
 			v.setSituacao(situacaoEditar.getText());
 			v.setLad(isCobradaEditar.isSelected());
+			v.setObs(observacaoEditar.getText());
+			v.setValor(Double.parseDouble(valorEditar.getText()));
 			if (new VisitaTecnicaDao().update(v)) {
 				numeroChamadoEditar.clear();
 				tecnicoEditar.clear();
@@ -445,29 +487,5 @@ public class GuiControllerConsultaVisita {
 		}
 	}
 
-//	@FXML
-//	public void exportar(ActionEvent action) {
-//		System.out.println("exportando");
-//		String caminho = "C:\\agendamentos\\visitaTecnica.csv";
-////		Path path =  
-//		try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho, true))) {
-//			for (VisitaTecnica v : listaVisita) {
-//				if (cont == 0) {
-//					System.out.println("ta dizendo que não existe");
-//					bw.write("tecnico; numero chamado; empresa; data inicio; data fim; situaca; cobrada");
-//					bw.newLine();
-//					bw.write(v.toString());
-//					bw.newLine();
-//					cont++;
-//				} else {
-//					bw.write(v.toString());
-//					bw.newLine();
-//				}
-//
-//			}
-//		} catch (IOException io) {
-//			io.getMessage();
-//		}
-//	}
 
 }

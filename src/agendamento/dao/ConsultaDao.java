@@ -42,6 +42,8 @@ public class ConsultaDao {
 				v.setTecnico(rs.getString("tecnico"));
 				v.setLad(rs.getBoolean("is_lad"));
 				v.setSituacao(rs.getString("situacao"));
+				v.setObs(rs.getString("obs"));
+				v.setValor(rs.getDouble("valor"));
 
 				listaVisita.add(v);
 			}
@@ -75,6 +77,8 @@ public class ConsultaDao {
 				v.setTecnico(rs.getString("tecnico"));
 				v.setLad(rs.getBoolean("is_lad"));
 				v.setSituacao(rs.getString("situacao"));
+				v.setObs(rs.getString("obs"));
+				v.setValor(rs.getDouble("valor"));
 				
 				listaVisita.add(v);
 			}
@@ -102,7 +106,6 @@ public class ConsultaDao {
 			for (VisitaTecnica v : lista) {
 				if (v.getTecnico().contains(tecnico)) {
 					listaVisitaTecnico.add(v);
-					
 				}
 			}
 		}
@@ -142,6 +145,8 @@ public class ConsultaDao {
 				v.setTecnico(rs.getString("tecnico"));
 				v.setLad(rs.getBoolean("is_lad"));
 				v.setSituacao(rs.getString("situacao"));
+				v.setObs(rs.getString("obs"));
+				v.setValor(rs.getDouble("valor"));
 				
 				listaVisitaTecnico.add(v);
 			}

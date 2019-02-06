@@ -25,7 +25,7 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 	public boolean salvar(VisitaTecnica obj) {
 		Object v = buscarPorNumeroChamado(obj.getNumeroChamado());
 		conn = Connector.abrirConexao();
-		sql = "INSERT INTO visita_tecnica (numero_chamado, tipo, data_inicio, data_fim, empresa, tecnico, is_lad, situacao) VALUES (?,?,?,?,?,?,?,?)";
+		sql = "INSERT INTO visita_tecnica (numero_chamado, tipo, data_inicio, data_fim, empresa, tecnico, is_lad, situacao, obs, valor) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		boolean resultado = false;
 		if (v != null) {
 			alert = new Alert(AlertType.INFORMATION, "Já temos uma visita com esse chamado, crie uma nova tarefa.");
@@ -43,6 +43,8 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 			query.setString(6, obj.getTecnico());
 			query.setBoolean(7, obj.getLad());
 			query.setString(8, obj.getSituacao());
+			query.setString(9, obj.getObs());
+			query.setDouble(10, obj.getValor());
 			int insert = query.executeUpdate();
 			if (insert > 0) {
 				alert = new Alert(AlertType.INFORMATION, "Visita Tecnica Salva.");
@@ -114,6 +116,8 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setDataInicio(
 						LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				v.setObs(rs.getString("obs"));
+				v.setValor(rs.getDouble("valor"));
 				listaVisitas.add(v);
 			}
 
@@ -145,6 +149,9 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 				v.setDataFim(LocalDate.parse(rs.getString("data_fim"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				v.setDataInicio(
 						LocalDate.parse(rs.getString("data_inicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				v.setObs(rs.getString("obs"));
+				v.setValor(rs.getDouble("valor"));
+				
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -179,6 +186,9 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 				vs.setTecnico(rs.getString("tecnico"));
 				vs.setLad(rs.getBoolean("is_lad"));
 				vs.setSituacao(rs.getString("situacao"));
+				vs.setObs(rs.getString("obs"));
+				vs.setValor(rs.getDouble("valor"));
+				
 				lista.add(vs);
 			}
 
@@ -193,7 +203,16 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 	public Boolean update(VisitaTecnica v) {
 		Boolean bool = false;
 		conn = Connector.abrirConexao();
-		sql = "UPDATE visita_tecnica SET numero_chamado = ?, tecnico = ?, data_inicio = ?, data_fim = ?, empresa = ?, situacao = ?, is_lad = ? WHERE id_visita_tecnica = ?";
+		sql = "UPDATE visita_tecnica SET numero_chamado = ?,"
+				+ " tecnico = ?,"
+				+ " data_inicio = ?,"
+				+ " data_fim = ?,"
+				+ " empresa = ?,"
+				+ " situacao = ?,"
+				+ " is_lad = ?,"
+				+ " obs = ?,"
+				+ " valor = ?"
+				+ " WHERE id_visita_tecnica = ?";
 		int update = 0;
 		
 		try { 
@@ -205,7 +224,10 @@ public class VisitaTecnicaDao implements IDao<VisitaTecnica> {
 			query.setString(5, v.getEmpresa());
 			query.setString(6, v.getSituacao());
 			query.setBoolean(7, v.getLad());
-			query.setInt(8, v.getIdVisitaTecnica());
+			query.setString(8, v.getObs());
+			query.setDouble(9, v.getValor());
+			query.setInt(10, v.getIdVisitaTecnica());
+			
 			update = query.executeUpdate();
 			if (update > 0) {
 				bool = true;

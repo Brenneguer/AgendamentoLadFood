@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import agendamento.VisitaTecnica;
 import javafx.scene.control.Alert;
@@ -16,8 +17,8 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Exportar {
 	public void exportarExcel(String ondeSalvar, List<VisitaTecnica> lista) {
-		HSSFWorkbook workbook = new HSSFWorkbook();
-		HSSFSheet sheet = workbook.createSheet("alura");
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet("Lad Food");
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		int i = 0;
@@ -32,12 +33,13 @@ public class Exportar {
 		for (VisitaTecnica v : lista) {
 
 			if (i == 0) {
-				HSSFRow row = sheet.createRow(i);
+				XSSFRow row = sheet.createRow(i);
 				row.createCell(0).setCellValue("Tecnico");
 				row.createCell(1).setCellValue("Tipo");
 				row.createCell(2).setCellValue("Numero Chamado");
 				row.createCell(3).setCellValue("Tarefa Pai");
-				row.createCell(4).setCellValue("Data Inicio");
+				row.createCell(4, CellType.NUMERIC).setCellValue("Data Inicio");
+				
 				row.createCell(5).setCellValue("Data Fim");
 				row.createCell(6).setCellValue("Valor");
 				row.createCell(7).setCellValue("Situação");
@@ -46,7 +48,7 @@ public class Exportar {
 				i++;
 			}
 			if (i > 0) {
-				HSSFRow row = sheet.createRow(i);
+				XSSFRow row = sheet.createRow(i);
 				row.createCell(0).setCellValue(v.getTecnico());
 				row.createCell(1).setCellValue(v.getTipo());
 				row.createCell(2).setCellValue(v.getNumeroChamado());
@@ -63,7 +65,7 @@ public class Exportar {
 		try (FileOutputStream file = new FileOutputStream(new File(ondeSalvar))) {
 			workbook.write(file);
 
-			Alert alert = new Alert(AlertType.INFORMATION, "Salvo em C:\\Agendamento\\lad food\\lista visita.xls");
+			Alert alert = new Alert(AlertType.INFORMATION, "Salvo em C:\\Agendamento\\lad food\\lista visita.xlsx");
 			alert.setTitle("Exportar");
 			alert.setHeaderText("Exportação Concluida.");
 			alert.show();
