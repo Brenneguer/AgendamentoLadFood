@@ -103,7 +103,16 @@ public class GuiControllerCadastroVisita {
 			v.setSituacao(situacao.getText());
 			v.setObs(obs.getText());
 			v.setLad(isCobrada.isSelected());
-			v.setValor(Double.parseDouble(valor.getText()));
+			
+			if(isCobrada.isSelected() == true) {
+				if (!valor.getText().equals("")) {
+					v.setValor(Double.parseDouble(valor.getText()));
+				}
+				else 
+					v.setValor(0);
+			} else 
+				v.setValor(0);
+			
 			if(isVisita.isSelected() == true) {
 				v.setTipo("Visita Técnica");
 			} if(isImplantacao.isSelected() == true) {
@@ -116,6 +125,7 @@ public class GuiControllerCadastroVisita {
 				dataFim.clear();
 				tarefaPai.clear();
 				situacao.clear();
+				obs.clear();
 				valor.clear();
 				valor.setVisible(false);
 				labelValor.setVisible(false);
